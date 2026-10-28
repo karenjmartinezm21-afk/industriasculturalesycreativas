@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio ICC - Industrias Culturales y Creativas</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            900: '#14532d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300 min-h-screen flex flex-col font-sans">
+
+    <!-- HEADER / NAVBAR -->
+    <header class="sticky top-0 z-40 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="bg-brand-600 text-white p-2 rounded-xl shadow-md">
+                    <i class="fa-solid fa-palette text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg leading-tight">Portafolio ICC</h1>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">Industrias Culturales y Creativas</p>
+                </div>
+            </div>
+
+            <!-- Dark Mode Toggle & Counter -->
+            <div class="flex items-center space-x-4">
+                <span class="text-xs font-medium px-2.5 py-1 rounded-full bg-brand-100 text-brand-800 dark:bg-brand-900/40 dark:text-brand-300 hidden sm:inline-block">
+                    8 Proyectos
+                </span>
+                <button id="themeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+                    <i class="fa-solid fa-moon dark:hidden text-lg"></i>
+                    <i class="fa-solid fa-sun hidden dark:block text-lg text-yellow-400"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="bg-gradient-to-b from-brand-50/50 to-transparent dark:from-gray-800/40 dark:to-transparent py-10 px-4">
+        <div class="max-w-4xl mx-auto text-center space-y-4">
+            <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">
+                Recopilación de Proyectos Académicos
+            </h2>
+            <p class="text-gray-600 dark:text-gray-300 text-base sm:text-lg max-w-2xl mx-auto">
+                Explora las iniciativas desarrolladas en el espacio académico de Industrias Culturales y Creativas.
+            </p>
+
+            <!-- BUSCADOR Y FILTROS -->
+            <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3 max-w-2xl mx-auto">
+                <div class="relative w-full">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    <input type="text" id="searchInput" placeholder="Buscar por título, palabra clave, autor..." 
+                           class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition text-sm">
+                </div>
+            </div>
+
+            <!-- Categorías -->
+            <div class="flex flex-wrap justify-center gap-2 pt-2" id="categoryFilters">
+                <button data-cat="all" class="filter-btn active px-3.5 py-1.5 rounded-full text-xs font-semibold bg-brand-600 text-white shadow-sm transition">Todos</button>
+                <button data-cat="apps" class="filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-gray-200 text-gray-700 dark:bg-gray-800 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700 transition">Plataformas / Apps</button>
+                <button data-cat="editorial" class="filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-gray-200 text-gray-700 dark:bg-gray-800 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700 transition">Editorial & Prensa</button>
+                <button data-cat="games" class="filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-gray-200 text-gray-700 dark:bg-gray-800 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700 transition">Videojuegos</button>
+                <button data-cat="branding" class="filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-gray-200 text-gray-700 dark:bg-gray-800 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700 transition">Branding & Memoria</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- GRID DE PROYECTOS -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow">
+        <div id="projectsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Las tarjetas se generan dinámicamente con JS -->
+        </div>
+
+        <div id="noResults" class="hidden text-center py-16 space-y-3">
+            <i class="fa-solid fa-folder-open text-4xl text-gray-400"></i>
+            <p class="text-gray-500 dark:text-gray-400 font-medium">No se encontraron proyectos con ese criterio de búsqueda.</p>
+        </div>
+    </main>
+
+    <!-- MODAL DE DETALLE -->
+    <div id="projectModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl max-w-2xl w-full overflow-hidden shadow-2xl transform transition-all max-h-[90vh] flex flex-col">
+            <div class="relative h-48 sm:h-64 bg-gray-100 dark:bg-gray-900 flex-shrink-0">
+                <img id="modalImage" src="" alt="" class="w-full h-full object-cover">
+                <button id="closeModal" class="absolute top-3 right-3 bg-black/50 hover:bg-black/70 text-white rounded-full w-8 h-8 flex items-center justify-center transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <div class="absolute bottom-3 left-3">
+                    <span id="modalCategory" class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-brand-600 text-white shadow"></span>
+                </div>
+            </div>
+            
+            <div class="p-6 overflow-y-auto space-y-4 flex-grow">
+                <h3 id="modalTitle" class="text-2xl font-bold text-gray-900 dark:text-white"></h3>
+                
+                <div class="space-y-2">
+                    <h4 class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Descripción Completa</h4>
+                    <p id="modalDescription" class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed whitespace-pre-line"></p>
+                </div>
+
+                <div class="space-y-2">
+                    <h4 class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Clasificación & Contexto ICC</h4>
+                    <p id="modalDetails" class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed bg-gray-50 dark:bg-gray-900/50 p-3 rounded-lg border border-gray-100 dark:border-gray-700/50 whitespace-pre-line"></p>
+                </div>
+
+                <div id="modalTeamContainer" class="pt-2">
+                    <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider block mb-1">Integrantes / Autores</span>
+                    <p id="modalTeam" class="text-sm font-medium text-gray-800 dark:text-gray-200"></p>
+                </div>
+            </div>
+
+            <div class="p-4 bg-gray-50 dark:bg-gray-900/50 border-t border-gray-200 dark:border-gray-700/50 flex flex-wrap gap-2 justify-end" id="modalLinks">
+                <!-- Enlaces dinámicos -->
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 py-6 text-center text-xs text-gray-500 dark:text-gray-400">
+        <p>© Portafolio de Industrias Culturales y Creativas (ICC)</p>
+    </footer>
+
+    <!-- JAVASCRIPT CON TEXTOS COMPLETOS E INTEGRALES -->
+    <script>
+        const projectsData = [
+            {
+                id: 'musica-viva',
+                title: '¡Que la música viva!',
+                category: 'editorial',
+                categoryLabel: 'Artes & Editorial',
+                image: 'img/¡QUÉ LA MÚSICA VIVA!.jpeg',
+                description: 'Este proyecto fue desarrollado en el espacio académico de la clase de INDUSTRIAS CULTURALES Y CREATIVAS con el propósito de aplicar los conocimientos vistos en el período académico.\n\n¡Que la música viva! es una propuesta que integra un libro interactivo y la animación stop-motion para dar a conocer los instrumentos tradicionales colombianos. Su objetivo es preservar y difundir el patrimonio musical del país mediante la narración, la ilustración y la exploración sonora.',
+                details: 'Según la tabla de las ICC, se relaciona con el Campo de las artes centrales, en el sector de Artes Visuales y patrimonio, por su intención de transmitir las tradiciones culturales, y con el Círculo 1: Industrias culturales, en los sectores de Libros y prensa y Cine y video, por sus formatos editorial y audiovisual.\n\nLa aplicación permite ampliar la experiencia del libro mediante la exploración de sonidos, instrumentos tradicionales colombianos. Se clasifica en el Círculo 2: Industrias y actividades creativas, sector Diseño, ya que requiere desarrollar una interfaz y organizar recursos digitales para facilitar la interacción del usuario. Su función es complementar el proyecto con una herramienta educativa que conecte el patrimonio musical con nuevas formas de aprendizaje de manera atractiva y simbólica para los usuarios.',
+                team: 'Ashley Yareni Martinez Florez',
+                links: []
+            },
+            {
+                id: 'bogota-ancestral',
+                title: 'Bogotá Ancestral',
+                category: 'games',
+                categoryLabel: 'Videojuegos',
+                image: 'img/bogota_ancestral.jpeg',
+                description: 'Bogotá Ancestral es un videojuego en formato 8-bit que invita a explorar la ciudad desde una perspectiva diferente (la de sus comunidades indígenas). A través de misiones, diálogos y descubrimientos, el jugador recorre distintos territorios, conoce sus historias y se conecta con las culturas que también forman parte de Bogotá, aunque no siempre estén presentes en los mapas oficiales. Más que un juego, es una experiencia que busca enseñar, valorar y visibilizar la riqueza cultural de la ciudad.',
+                details: 'Este proyecto hace parte de las industrias culturales y creativas, ya que combina creatividad, tecnología y cultura para promover el patrimonio, la identidad y la diversidad cultural mediante un lenguaje innovador y accesible como los videojuegos. Asimismo, pertenece al círculo de las artes, debido a su relación con la creación y producción de contenidos digitales interactivos y audiovisuales.',
+                team: 'Daniela Leguizamón, Vanessa Sandoval, Daniel Vega',
+                links: []
+            },
+            {
+                id: 'compostot',
+                title: 'Compostot',
+                category: 'apps',
+                categoryLabel: 'Diseño & TIC',
+                image: 'img/compostot.jpeg',
+                description: 'COMPOSTOT - La Huella Circular Solución Ecológica e Inteligente.\n\nCOMPOSTOT es un sistema higiénico para parques y conjuntos residenciales que transforma las heces de mascotas en abono orgánico. Integra estaciones inteligentes con acceso mediante código QR, bolsas compostables de almidón de maíz o yuca y recolección especializada para aprovechar estos residuos en jardines.\n\nPrototipos e insumos: Abono Orgánico (Doypack y sacos), Bolsas Compostables (almidón de maíz) y Estación Residencial (Caneca inteligente con sensor IoT y buzón anti-contacto).',
+                details: 'Como propuesta de las Industrias Culturales y Creativas (ICC), se desarrolla desde el Diseño de Servicio: articula identidad de marca, diseño de estaciones, interfaz UX/UI y gamificación para promover hábitos responsables, sostenibilidad y convivencia ciudadana.\n\nSegún el Modelo KEA, se ubica principalmente en el Círculo 2 (Industrias Creativas - Sector Diseño) y se apoya en el Círculo 3 (Industrias Relacionadas - TIC e industria móvil), mediante sensores IoT y una plataforma digital interactiva.\n\nPaleta de colores: Verde Hoja (#74C69D), Crema Claro (#F4F7F4), Blanco Puro (#FFFFFF), Verde Bosque (#1B4332), Verde Menta (#2D6A4F).',
+                team: 'Valentina Rodríguez, Jonathan Ovalle, Alejandro Martín, Yhorman Pinillo',
+                links: [
+                    { label: 'Página Web Oficial', url: 'https://compostot.netlify.app', icon: 'fa-globe' }
+                ]
+            },
+            {
+                id: 'desintoxicados',
+                title: 'Desintoxicados',
+                category: 'editorial',
+                categoryLabel: 'Prensa & Podcast',
+                image: 'img/Desintoxicados.jpeg',
+                description: 'Desintoxicados es un medio digital independiente que surgió en el espacio académico de Industrias Culturales y Creativas (ICC), a partir de la aplicación de los conceptos trabajados en clase sobre la creación, producción y circulación de contenidos culturales y creativos.\n\nSe propone como un medio digital independiente dirigido a estudiantes de colegios, que utiliza el periodismo y distintos formatos digitales para visibilizar sus experiencias, problemáticas y necesidades. A través de su portal web, promueve la información, la reflexión y la participación estudiantil, dando voz a situaciones del entorno escolar que suelen pasar desapercibidas. Sus contenidos incluyen artículos, storytelling audiovisual y podcast, formatos que permiten contar experiencias, generar conciencia sobre las realidades educativas y fomentar la participación juvenil.',
+                details: 'El proyecto hace parte de las Industrias Culturales y Creativas porque desarrolla, produce y distribuye contenidos periodísticos e informativos mediante medios digitales. Pertenece al Círculo 1: Industrias culturales, sector Libros y prensa, subsector Prensa, ya que su actividad central es la creación y difusión de contenido periodístico. El portal web, el video y el podcast complementan esta labor y amplían el alcance de sus contenidos.',
+                team: 'Laura Suan, Dilan López, Carolina Benavides',
+                links: [
+                    { label: 'Visitar Portal Web', url: 'https://desintoxicados.site/', icon: 'fa-newspaper' }
+                ]
+            },
+            {
+                id: 'historias-barrio',
+                title: 'Historias de Barrio',
+                category: 'branding',
+                categoryLabel: 'Fotografía & Memoria',
+                image: 'img/historias_barrio.jpeg',
+                description: 'Historias de Barrio: Memoria, identidad y nuevas miradas sobre los barrios populares.\n\nHistorias de Barrio es un proyecto cultural y de comunicación visual que nace con el propósito de visibilizar las historias, memorias e identidades de los barrios populares, comenzando por Los Laches, en Bogotá. A través de la fotografía, la ilustración y las herramientas digitales, busca ampliar la mirada sobre estos territorios, mostrando sus espacios, costumbres, expresiones culturales y experiencias cotidianas, más allá de los imaginarios negativos que pueden existir sobre ellos.\n\nTe invitamos a descubrir las historias que habitan estos lugares, a mirar más allá de los prejuicios y a reconocer la riqueza cultural que muchas veces pasa desapercibida.',
+                details: 'Este proyecto hace parte de las Industrias Culturales y Creativas (ICC) porque transforma la cultura, la memoria y las experiencias del territorio en contenidos visuales con valor cultural y potencial creativo y económico. Se ubica principalmente en el círculo de creación, mediante el diseño gráfico, la fotografía y la ilustración, y puede extenderse a la producción y circulación de publicaciones, exposiciones y contenidos digitales.',
+                team: 'Equipo Académico',
+                links: []
+            },
+            {
+                id: 'origenes',
+                title: 'Orígenes',
+                category: 'apps',
+                categoryLabel: 'App & Patrimonio',
+                image: 'img/Orígenes.jpeg',
+                description: '"Orígenes" es un producto diseñado en el espacio de la asignatura de Industrias Culturales y Creativas, cuyo propósito es preservar y promover la cerámica artesanal colombiana, conectando a las nuevas generaciones con nuestras raíces culturales mediante una aplicación interactiva que permite conocer la historia de cada pieza y de su artesano. Esta propuesta busca fortalecer la identidad cultural, visibilizar el trabajo artesanal y generar nuevas oportunidades comerciales y de empleo.',
+                details: 'El proyecto forma parte de las Industrias Culturales y Creativas porque combina el arte, la tradición, la creatividad y la tecnología para generar valor cultural y económico. Se ubica principalmente en el Círculo 1, correspondiente a las Artes Creativas Principales, por su enfoque en la cerámica artesanal, y se relaciona con el Círculo 3, de las Industrias Culturales más Amplias, al incorporar herramientas digitales que acercan nuestras tradiciones a las nuevas generaciones.',
+                team: 'Daniel Galindo, Karen Martínez',
+                links: [
+                    { label: 'Prototipo Figma', url: 'https://www.figma.com/design/oLpqJ5RYZWcq4ZYZD9WnSB/splash-screen-and-onboarding-screen--Community-?node-id=0-1&m=dev&t=WnvhAnPkPA2Z146E-1', icon: 'fa-figma' },
+                    { label: 'Sitio Netlify', url: 'https://origenesdelaceramica.netlify.app', icon: 'fa-globe' }
+                ]
+            },
+            {
+                id: 'raices',
+                title: 'RAÍCES - Memoria de barrio',
+                category: 'branding',
+                categoryLabel: 'Web & Archivo Digital',
+                image: 'img/RAÍCES - memoria de barrio.jpeg',
+                description: '¿Qué es nuestro producto?\nRAÍCES es una página web creada para recuperar, preservar y compartir las historias, los recuerdos, los personajes y las tradiciones que hacen únicos a nuestros barrios. A través de fotografías, relatos y contenido audiovisual, buscamos conectar el pasado con el presente y acercar a las nuevas generaciones a la memoria de los lugares donde vivimos.\n\n¿Cuál es nuestro propósito?\nNuestro propósito es evitar que las historias de los barrios se pierdan con el paso del tiempo, creando un espacio digital donde las personas puedan descubrir su historia, compartir sus recuerdos y reconocer el valor cultural de su comunidad.\n\nRAÍCES: las calles cambian, las historias permanecen.',
+                details: 'Desarrollado como plataforma web interactiva y archivo visual que conecta la memoria histórica con las nuevas tecnologías digitales dentro de las Industrias Culturales y Creativas.',
+                team: 'Equipo Académico',
+                links: [
+                    { label: 'Enlace Canva', url: 'https://canva.link/1il5at60k2at4tq', icon: 'fa-arrow-up-right-from-square' }
+                ]
+            },
+            {
+                id: 'raiz-laboratorio',
+                title: 'RAÍZ - Laboratorio Patrimonial',
+                category: 'branding',
+                categoryLabel: 'Branding & Identidad',
+                image: 'img/RAÍZ.jpeg',
+                description: 'Resumen ejecutivo:\nRaíz es un laboratorio de marcas patrimoniales (agencia de branding) para artesanos colombianos. Convierte cada oficio en una marca con identidad, historia y capacidad de venta digital, preservando la tradición y ampliando su alcance comercial. Combina documentación, branding, packaging, narrativa cultural, tienda digital y acompañamiento.\n\nIdea central: la artesanía no debe industrializarse; su historia, identidad y tradición pueden convertirse en una marca capaz de competir en el mercado actual.\n\nPropuesta de valor: convertir el oficio en una marca vendible, preservando su historia y aumentando su alcance. Factor diferenciador: se documenta la historia, se diseña identidad y empaque y se lanza una tienda digital propia, sin que el artesano invierta capital inicial ni necesite saber de diseño o tecnología. Enfoque: branding humanizado.\n\nServicio en cinco etapas:\n01. Documentación (Fotografía, video y relato del artesano y su oficio)\n02. Identidad (Logo, colores, tipografía y sistema de marca)\n03. Packaging (Empaque funcional que protege y comunica)\n04. Tienda digital (Micro-marca con catálogo y venta directa)\n05. Acompañamiento (Capacitación en pedidos, redes y gestión)',
+                details: 'Clasificación ICC: El proyecto toca el Círculo 1 (industrias culturales: documentación en cine, video y libros), el Círculo 2 (industrias creativas: diseño, identidad visual, empaque, comunicación y branding, núcleo del proyecto) y el Círculo 3 (tecnología y plataformas digitales).\n\nModelo de negocio: Atiende a artesanos individuales, asociaciones artesanales y marcas. Ingresos por tarifa inicial reducida, comisión del 5-10% sobre ventas y servicios adicionales.\n\n"No buscamos convertir la artesanía en un producto industrial, sino convertir su historia, identidad y tradición en una marca capaz de competir en el mundo actual."',
+                team: 'Juan Zambrano, Johan Penagos, Jennifer Gonzalez',
+                links: []
+            }
+        ];
+
+        const grid = document.getElementById('projectsGrid');
+        const noResults = document.getElementById('noResults');
+
+        function renderProjects(data) {
+            grid.innerHTML = '';
+            
+            if (data.length === 0) {
+                noResults.classList.remove('hidden');
+                return;
+            } else {
+                noResults.classList.add('hidden');
+            }
+
+            data.forEach(p => {
+                const card = document.createElement('div');
+                card.className = "bg-white dark:bg-gray-800 rounded-2xl overflow-hidden border border-gray-100 dark:border-gray-700/60 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group cursor-pointer";
+                card.onclick = () => openModal(p.id);
+
+                card.innerHTML = `
+                    <div class="relative h-44 overflow-hidden bg-gray-100 dark:bg-gray-900">
+                        <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onError="this.src='https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?w=500'">
+                        <div class="absolute top-2 right-2">
+                            <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-white/90 dark:bg-gray-900/90 text-gray-800 dark:text-gray-200 shadow-sm">
+                                ${p.categoryLabel}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow justify-between space-y-3">
+                        <div>
+                            <h3 class="font-bold text-gray-900 dark:text-white text-base group-hover:text-brand-600 dark:group-hover:text-brand-500 transition-colors line-clamp-1">${p.title}</h3>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1 line-clamp-3">${p.description}</p>
+                        </div>
+                        <div class="pt-2 border-t border-gray-100 dark:border-gray-700/50 flex items-center justify-between text-xs text-brand-600 dark:text-brand-400 font-medium">
+                            <span>Ver detalle completo</span>
+                            <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        const modal = document.getElementById('projectModal');
+        const closeModalBtn = document.getElementById('closeModal');
+
+        function openModal(id) {
+            const project = projectsData.find(p => p.id === id);
+            if (!project) return;
+
+            document.getElementById('modalImage').src = project.image;
+            document.getElementById('modalTitle').textContent = project.title;
+            document.getElementById('modalCategory').textContent = project.categoryLabel;
+            document.getElementById('modalDescription').textContent = project.description;
+            document.getElementById('modalDetails').textContent = project.details;
+            document.getElementById('modalTeam').textContent = project.team;
+
+            const linksContainer = document.getElementById('modalLinks');
+            linksContainer.innerHTML = '';
+
+            if (project.links && project.links.length > 0) {
+                project.links.forEach(l => {
+                    const btn = document.createElement('a');
+                    btn.href = l.url;
+                    btn.target = "_blank";
+                    btn.className = "inline-flex items-center space-x-2 px-4 py-2 rounded-xl text-xs font-semibold bg-brand-600 hover:bg-brand-700 text-white shadow-sm transition";
+                    btn.innerHTML = `<i class="fa-solid ${l.icon || 'fa-link'}"></i> <span>${l.label}</span>`;
+                    linksContainer.appendChild(btn);
+                });
+            } else {
+                linksContainer.innerHTML = `<span class="text-xs text-gray-400 italic">Este proyecto no cuenta con enlaces externos activos.</span>`;
+            }
+
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        closeModalBtn.onclick = () => {
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        };
+
+        modal.onclick = (e) => {
+            if (e.target === modal) {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+        };
+
+        let currentCategory = 'all';
+        let searchQuery = '';
+
+        function filterProjects() {
+            const filtered = projectsData.filter(p => {
+                const matchesCat = currentCategory === 'all' || p.category === currentCategory;
+                const matchesSearch = p.title.toLowerCase().includes(searchQuery) || 
+                                      p.description.toLowerCase().includes(searchQuery) ||
+                                      p.team.toLowerCase().includes(searchQuery);
+                return matchesCat && matchesSearch;
+            });
+            renderProjects(filtered);
+        }
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => {
+                    b.classList.remove('bg-brand-600', 'text-white', 'active');
+                    b.classList.add('bg-gray-200', 'text-gray-700', 'dark:bg-gray-800', 'dark:text-gray-300');
+                });
+                btn.classList.remove('bg-gray-200', 'text-gray-700', 'dark:bg-gray-800', 'dark:text-gray-300');
+                btn.classList.add('bg-brand-600', 'text-white', 'active');
+
+                currentCategory = btn.getAttribute('data-cat');
+                filterProjects();
+            });
+        });
+
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            searchQuery = e.target.value.toLowerCase();
+            filterProjects();
+        });
+
+        const themeToggleBtn = document.getElementById('themeToggle');
+        themeToggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+        });
+
+        renderProjects(projectsData);
+    </script>
+</body>
+</html>
