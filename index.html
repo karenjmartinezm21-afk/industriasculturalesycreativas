@@ -1,559 +1,274 @@
 <!DOCTYPE html>
-<html lang="es" class="dark scroll-smooth">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portafolio ICC - Industrias Culturales y Creativas</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: { extend: {
-                fontFamily: { display: ['"Bricolage Grotesque"', 'system-ui', 'sans-serif'], sans: ['"Instrument Sans"', 'system-ui', 'sans-serif'] },
-                colors: { brand: { 50:'#f0fdf4', 100:'#dcfce7', 500:'#22c55e', 600:'#16a34a', 700:'#15803d', 900:'#14532d' } }
-            } }
-        }
-    </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root { --bg:#f2f5f0; --ink:#101a13; --muted:#5a6a60; --line:#d8e0d9; --glass:rgba(242,245,240,.78); --accent:#22c55e; }
-        .dark { --bg:#08100b; --ink:#eef5ef; --muted:#93a69a; --line:#1f2f25; --glass:rgba(8,16,11,.78); }
-        body { background:var(--bg); color:var(--ink); font-family:'Instrument Sans',system-ui,sans-serif; transition:background-color .5s; overflow-x:hidden; }
-        .font-display { font-family:'Bricolage Grotesque',system-ui,sans-serif; }
-        .muted { color:var(--muted); }
-        .glass { background:var(--glass); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); }
-        :focus-visible { outline:3px solid var(--accent); outline-offset:3px; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portafolio ICC · Industrias Culturales y Creativas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root{--bg:#f7f2e9;--surface:#fffdf8;--ink:#1f1b16;--muted:#6b6258;--line:#e4dccd;--accent:#b5472e;--shadow:0 18px 40px -22px rgba(60,40,20,.35)}
+.dark{--bg:#14120f;--surface:#1c1916;--ink:#f3ede2;--muted:#a79d8f;--line:#2e2924;--shadow:0 18px 40px -22px rgba(0,0,0,.8)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.6;transition:background .4s,color .4s;overflow-x:hidden}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:700;line-height:1.1}
+.muted{color:var(--muted)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 1.5rem}
+#bar{position:fixed;top:0;left:0;height:3px;width:0;background:var(--accent);z-index:100;transition:background .4s}
 
-        /* Cursor y vista previa flotante */
-        .cursor { position:fixed; top:0; left:0; width:38px; height:38px; margin:-19px 0 0 -19px; border:2px solid var(--accent); border-radius:9999px; pointer-events:none; z-index:90; transition:width .25s, height .25s, margin .25s, background .25s; }
-        .cursor.big { width:84px; height:84px; margin:-42px 0 0 -42px; background:color-mix(in srgb,var(--accent) 22%,transparent); }
-        .peek { position:fixed; top:0; left:0; width:270px; height:340px; border-radius:1.25rem; overflow:hidden; pointer-events:none; z-index:45; opacity:0; box-shadow:0 30px 70px -20px rgba(0,0,0,.6); transition:opacity .25s; background:var(--bg); border:1px solid var(--line); }
-        .peek.show { opacity:1; }
-        .peek img { width:100%; height:100%; object-fit:contain; padding:.5rem; }
-        @media (hover:none) { .cursor, .peek { display:none; } }
+header{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+header .wrap{height:64px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:.75rem;font-family:Fraunces,serif;font-weight:700;font-size:1.1rem}
+.logo{width:36px;height:36px;border-radius:10px;background:var(--accent);color:#fff;display:grid;place-items:center;font-size:.95rem;transition:background .4s}
+.brand small{display:block;font-family:Inter,sans-serif;font-weight:400;font-size:.7rem;color:var(--muted)}
+.hnav{display:flex;align-items:center;gap:1rem}
+.badge{font-size:.72rem;font-weight:600;padding:.3rem .8rem;border-radius:999px;color:var(--accent);background:color-mix(in srgb,var(--accent) 14%,transparent)}
+.icon-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;display:grid;place-items:center;transition:transform .25s,border-color .25s}
+.icon-btn:hover{transform:translateY(-2px);border-color:var(--accent)}
+.icon-btn.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 
-        /* Hero */
-        #kTitle .ch { display:inline-block; font-variation-settings:'wght' 500; will-change:transform; }
-        #kTitle .w { display:inline-block; white-space:nowrap; }
-        .cue i { animation:bob 1.6s ease-in-out infinite; }
-        @keyframes bob { 50% { transform:translateY(8px); } }
+/* Hero */
+.hero{position:relative;padding:7rem 0 6rem;overflow:hidden;border-bottom:1px solid var(--line)}
+.pattern{position:absolute;inset:-20% -10%;opacity:.5;pointer-events:none;background:
+ repeating-conic-gradient(from 45deg at 50% 50%,color-mix(in srgb,var(--accent) 14%,transparent) 0 25%,transparent 0 50%) 0 0/56px 56px;
+ -webkit-mask-image:radial-gradient(circle at 80% 30%,#000,transparent 65%);mask-image:radial-gradient(circle at 80% 30%,#000,transparent 65%)}
+.hero .wrap{position:relative}
+.hero h2{font-size:clamp(3rem,9vw,7rem);max-width:12ch;margin:0 0 1.2rem}
+.hero h2 em{font-style:italic;color:var(--accent);transition:color .4s}
+.hero p.lead{max-width:54ch;font-size:1.1rem}
+.cta{display:inline-grid;place-items:center;margin-top:2.5rem;width:3rem;height:3rem;border-radius:50%;background:var(--ink);color:var(--bg);font-weight:600;font-size:.88rem;text-decoration:none;transition:transform .25s,background .25s}
+.cta:hover{transform:translateY(-3px);background:var(--accent)}
 
-        /* Barra de herramientas */
-        .pill { display:inline-flex; align-items:center; gap:.45rem; padding:.5rem 1rem; border-radius:9999px; font-size:.78rem; font-weight:600; border:1px solid var(--line); color:var(--muted); transition:all .3s; }
-        .pill:hover { color:var(--ink); border-color:var(--accent); transform:translateY(-2px); }
-        .pill .count { font-size:.68rem; padding:.05rem .45rem; border-radius:9999px; background:var(--line); }
-        .pill.active { background:var(--accent); border-color:var(--accent); color:#fff; }
-        .pill.active .count { background:rgba(255,255,255,.25); }
-        .vbtn { width:2.4rem; height:2.4rem; border-radius:9999px; border:1px solid var(--line); color:var(--muted); display:inline-flex; align-items:center; justify-content:center; transition:all .25s; }
-        .vbtn.active { background:var(--ink); color:var(--bg); border-color:var(--ink); }
+/* Barra de herramientas */
+.tools{position:sticky;top:64px;z-index:40;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.tools .wrap{padding-top:.8rem;padding-bottom:.8rem;display:flex;gap:.8rem;flex-wrap:wrap;align-items:center}
+.search{position:relative;flex:1 1 260px;max-width:360px}
+.search i{position:absolute;left:1rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.85rem}
+.search input{width:100%;padding:.65rem 1rem .65rem 2.6rem;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:.88rem;outline:none;transition:border-color .25s}
+.search input:focus{border-color:var(--accent)}
+.pills{display:flex;gap:.5rem;flex:2 1 400px;overflow-x:auto;scrollbar-width:none}
+.pills::-webkit-scrollbar{display:none}
+.pill{flex-shrink:0;display:inline-flex;align-items:center;gap:.45rem;padding:.5rem .95rem;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--muted);font:inherit;font-size:.8rem;font-weight:500;cursor:pointer;transition:all .25s}
+.pill:hover{color:var(--ink);border-color:var(--accent)}
+.pill i{width:8px;height:8px;border-radius:50%;background:var(--c,var(--muted))}
+.pill b{font-weight:600;font-size:.7rem;opacity:.7}
+.pill.active{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.views{display:flex;gap:.5rem;margin-left:auto}
 
-        /* Vista lista */
-        #projectsGrid.list .row { position:relative; display:grid; grid-template-columns:1.25fr .55fr 1fr auto; gap:1.5rem; align-items:center; padding:1.7rem 1.25rem; border-bottom:1px solid var(--line); overflow:hidden; cursor:pointer; opacity:0; transform:translateY(40px); transition:opacity .7s, transform .8s cubic-bezier(.2,.8,.2,1); }
-        .row.in, .tile.in { opacity:1 !important; transform:none !important; }
-        .row::before { content:""; position:absolute; inset:0; background:var(--rc); transform:scaleY(0); transform-origin:bottom; transition:transform .5s cubic-bezier(.7,0,.2,1); }
-        .row:hover::before, .row:focus-visible::before { transform:scaleY(1); }
-        .row > * { position:relative; transition:color .3s, transform .5s cubic-bezier(.2,.8,.2,1); }
-        .row:hover > *, .row:focus-visible > * { color:#fff; }
-        .rtitle { font-family:'Bricolage Grotesque',sans-serif; font-size:clamp(1.7rem,3.6vw,3rem); line-height:1.02; font-variation-settings:'wght' 400; transition:font-variation-settings .5s, transform .5s cubic-bezier(.2,.8,.2,1), color .3s; }
-        .row:hover .rtitle, .row:focus-visible .rtitle { font-variation-settings:'wght' 800; transform:translateX(16px); }
-        .rcat { font-size:.78rem; font-weight:600; display:inline-flex; align-items:center; gap:.5rem; }
-        .rcat::before { content:""; width:.55rem; height:.55rem; border-radius:9999px; background:var(--rc); }
-        .row:hover .rcat::before { background:#fff; }
-        .rdesc { font-size:.82rem; line-height:1.55; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
-        .rgo { display:inline-flex; align-items:center; gap:.6rem; font-size:.78rem; font-weight:600; white-space:nowrap; }
-        .rgo i { width:2.2rem; height:2.2rem; border-radius:9999px; border:1px solid currentColor; display:inline-flex; align-items:center; justify-content:center; transition:transform .4s; }
-        .row:hover .rgo i { transform:rotate(-45deg); }
-        .rthumb { display:none; }
-        @media (max-width:900px) {
-            #projectsGrid.list .row { grid-template-columns:1fr; gap:.75rem; }
-            .rthumb { display:block; width:100%; height:11rem; object-fit:contain; border-radius:1rem; background:color-mix(in srgb,var(--rc) 10%,var(--bg)); }
-        }
+/* Proyectos */
+main{padding:3rem 0 5rem}
+#grid.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1.4rem}
+#grid.list{display:flex;flex-direction:column;gap:1rem}
+.card{position:relative;display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden;cursor:pointer;opacity:0;transform:translateY(28px);transition:opacity .6s,transform .7s cubic-bezier(.2,.8,.2,1),box-shadow .35s,border-color .35s}
+.card.in{opacity:1;transform:none}
+.card:hover,.card:focus-visible{border-color:var(--c);box-shadow:var(--shadow);transform:translateY(-6px)}
+.card::before{content:"";position:absolute;left:0;top:0;height:4px;width:100%;background:var(--c);z-index:2;transform:scaleX(.18);transform-origin:left;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.card:hover::before,.card:focus-visible::before{transform:scaleX(1)}
+.thumb{aspect-ratio:4/3;padding:.8rem;background:color-mix(in srgb,var(--c) 9%,var(--bg))}
+.thumb img{width:100%;height:100%;object-fit:contain;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.card:hover .thumb img{transform:scale(1.03)}
+.body{padding:1.2rem 1.3rem 1.4rem;display:flex;flex-direction:column;gap:.55rem;flex:1}
+.tag{align-self:flex-start;font-size:.68rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:.25rem .65rem;border-radius:999px;color:var(--c);background:color-mix(in srgb,var(--c) 13%,transparent)}
+.body h3{font-size:1.35rem}
+.body p{font-size:.85rem;color:var(--muted);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.more{margin-top:auto;padding-top:.5rem;font-size:.8rem;font-weight:600;color:var(--c);display:flex;align-items:center;gap:.5rem}
+.more i{transition:transform .3s}
+.card:hover .more i{transform:translateX(5px)}
+#grid.list .card{flex-direction:row;align-items:stretch}
+#grid.list .card::before{width:4px;height:100%;transform:scaleY(.2);transform-origin:top}
+#grid.list .card:hover::before{transform:scaleY(1)}
+#grid.list .thumb{width:230px;aspect-ratio:auto;flex-shrink:0}
+#grid.list .body{padding:1.4rem 1.6rem;justify-content:center}
+#grid.list .body p{-webkit-line-clamp:2}
+.empty{display:none;text-align:center;padding:4rem 0}
+.empty i{font-size:2.5rem;margin-bottom:1rem}
+@media(max-width:700px){#grid.list .card{flex-direction:column}#grid.list .thumb{width:100%;aspect-ratio:4/3}.badge{display:none}.views{margin-left:0}}
 
-        /* Vista galería */
-        #projectsGrid.gallery { display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:1.1rem; padding:1.5rem 0 0; }
-        .tile { position:relative; border-radius:1.4rem; overflow:hidden; cursor:pointer; opacity:0; transform:translateY(50px); transition:opacity .7s, transform .8s cubic-bezier(.2,.8,.2,1), box-shadow .4s, border-color .4s; background:var(--glass); border:1px solid var(--line); }
-        .tile:nth-child(even) { margin-top:2.2rem; }
-        .tile:hover, .tile:focus-visible { border-color:var(--rc); box-shadow:0 18px 40px -18px var(--rc); }
-        .tile .ti { aspect-ratio:4/3; padding:.7rem; background:color-mix(in srgb,var(--rc) 10%,var(--bg)); }
-        .tile .ti img { width:100%; height:100%; object-fit:contain; transition:transform .6s cubic-bezier(.2,.8,.2,1); }
-        .tile:hover .ti img { transform:scale(1.03); }
-        .tile .tt { padding:1rem 1.1rem 1.2rem; }
-        .tile .tt span { display:inline-block; font-size:.68rem; font-weight:700; padding:.2rem .6rem; border-radius:9999px; background:color-mix(in srgb,var(--rc) 18%,transparent); color:var(--rc); margin-bottom:.5rem; }
-        .tile .tt h3 { font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:1.3rem; line-height:1.1; }
-        .tile .tt small { display:block; margin-top:.6rem; font-size:.74rem; font-weight:600; color:var(--rc); opacity:0; transition:opacity .4s; }
-        .tile:hover .tt small { opacity:1; }
+/* Detalle */
+#detail{position:fixed;inset:0;z-index:80;background:rgba(15,10,5,.55);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:1.2rem;opacity:0;visibility:hidden;transition:opacity .35s,visibility 0s .35s}
+#detail.open{opacity:1;visibility:visible;transition:opacity .35s}
+.panel{position:relative;width:min(1080px,100%);max-height:100%;display:grid;grid-template-columns:1fr 1fr;background:var(--surface);border-radius:24px;overflow:hidden;box-shadow:0 40px 90px -30px rgba(0,0,0,.6);transform:translateY(30px) scale(.97);transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+#detail.open .panel{transform:none}
+.pmedia{position:relative;min-height:320px;padding:2rem;display:grid;place-items:center;background:color-mix(in srgb,var(--accent) 10%,var(--bg))}
+.pmedia img{max-width:100%;max-height:70vh;object-fit:contain;border-radius:8px}
+.prog{position:absolute;left:0;bottom:0;height:4px;background:var(--accent);transition:width .5s}
+.pbody{padding:2.6rem 2.4rem;overflow-y:auto;max-height:90vh}
+.pbody h3{font-size:clamp(1.9rem,3.6vw,2.9rem);margin:.9rem 0 1.1rem}
+.rule{width:64px;height:4px;border-radius:4px;background:var(--accent);margin-bottom:1.4rem}
+.lbl{display:block;font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem}
+.pbody p{font-size:.95rem;color:var(--muted)}
+.pbody .team{font-weight:600;color:var(--ink);font-size:1.05rem}
+.pbody section{margin-bottom:1.6rem}
+.links{display:flex;flex-wrap:wrap;gap:.7rem}
+.link{display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.2rem;border-radius:999px;background:var(--accent);color:#fff;font-size:.82rem;font-weight:600;text-decoration:none;transition:transform .25s,box-shadow .25s}
+.link:hover{transform:translateY(-3px);box-shadow:0 12px 24px -10px var(--accent)}
+.pbar{position:absolute;top:1rem;right:1rem;z-index:3;display:flex;gap:.45rem}
+.pbar .icon-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+@media(max-width:820px){.panel{grid-template-columns:1fr;overflow-y:auto}.pmedia{min-height:0;padding:1.2rem}.pmedia img{max-height:36vh}.pbody{padding:1.6rem 1.4rem 2rem;max-height:none}}
 
-        /* Detalle a pantalla completa */
-        #detail { position:fixed; inset:0; z-index:70; background:var(--bg); clip-path:circle(0px at var(--ox,50%) var(--oy,50%)); visibility:hidden; transition:clip-path .75s cubic-bezier(.7,0,.2,1), visibility 0s .75s; }
-        #detail.open { clip-path:circle(160vmax at var(--ox,50%) var(--oy,50%)); visibility:visible; transition:clip-path .9s cubic-bezier(.7,0,.2,1), visibility 0s; }
-        .dgrid { height:100%; display:flex; flex-direction:column; }
-        @media (min-width:1024px) { .dgrid { flex-direction:row; } .dmedia { width:46%; height:100% !important; } }
-        .dmedia { position:relative; height:34vh; flex-shrink:0; overflow:hidden; background:color-mix(in srgb,var(--accent) 12%,var(--bg)); }
-        .dmedia img { position:absolute; inset:0; width:100%; height:100%; padding:1.5rem; object-fit:contain; transition:transform .25s ease-out; }
-        .dbody { flex:1; overflow-y:auto; padding:2.5rem 1.5rem 3rem; }
-        @media (min-width:1024px) { .dbody { padding:5rem 4rem 3rem; } }
-        .rv { opacity:0; transform:translateY(30px); transition:opacity .6s, transform .8s cubic-bezier(.2,.8,.2,1); }
-        #detail.open .rv { opacity:1; transform:none; transition-delay:calc(.5s + var(--d) * 110ms); }
-        .dbar { position:absolute; z-index:5; top:1rem; right:1rem; display:flex; gap:.5rem; }
-        .dbar button { width:2.8rem; height:2.8rem; border-radius:9999px; color:var(--ink); display:inline-flex; align-items:center; justify-content:center; transition:transform .25s, background .25s; }
-        .dbar button:hover { transform:scale(1.12); background:var(--accent); color:#fff; }
-        .link-btn { display:inline-flex; align-items:center; gap:.55rem; padding:.7rem 1.2rem; border-radius:9999px; font-size:.82rem; font-weight:600; color:#fff; background:var(--accent); transition:transform .25s, box-shadow .25s; }
-        .link-btn:hover { transform:translateY(-3px); box-shadow:0 14px 28px -10px var(--accent); }
-        .noresults-hide { display:none; }
-        .pill { white-space:nowrap; flex-shrink:0; }
-        .tbar { scrollbar-width:none; }
-        .tbar::-webkit-scrollbar { display:none; }
-        @media (hover:none) { .rgo { color:var(--rc); } }
-        @media (max-width:640px) {
-            #projectsGrid.gallery { grid-template-columns:repeat(2,1fr); gap:.7rem; }
-            .tile { border-radius:1.2rem; }
-            .tile .tt { padding:.7rem .8rem .9rem; }
-            .tile .tt h3 { font-size:1.02rem; }
-            .tile .tt small { display:none; }
-            #projectsGrid.list .row { padding:1.2rem 0 1.6rem; }
-            .rthumb { height:13rem; }
-            .rtitle { font-size:1.9rem; }
-            .rdesc { -webkit-line-clamp:3; }
-            .dbar { top:.75rem; right:.75rem; }
-        }
-        @media (prefers-reduced-motion:reduce) { *, *::before, *::after { animation-duration:.01ms !important; transition-duration:.01ms !important; } }
-    </style>
+footer{border-top:1px solid var(--line);padding:2rem 0;text-align:center;font-size:.78rem;color:var(--muted)}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}html{scroll-behavior:auto}}
+</style>
 </head>
-<body class="min-h-screen flex flex-col">
+<body>
+<div id="bar"></div>
 
-    <div id="scrollbar" class="fixed top-0 left-0 h-[3px] z-[95]" style="background:var(--accent); width:0"></div>
-    <div class="cursor" id="cursor"></div>
-    <div class="peek" id="peek"><img id="peekImg" src="" alt=""></div>
+<header>
+  <div class="wrap">
+    <div class="brand"><div class="logo"><i class="fa-solid fa-palette"></i></div><div>Portafolio ICC<small>Industrias Culturales y Creativas</small></div></div>
+    <div class="hnav"><span id="badge" class="badge"></span><button id="theme" class="icon-btn" aria-label="Cambiar tema"><i class="fa-solid fa-moon"></i></button></div>
+  </div>
+</header>
 
-    <!-- HEADER / NAVBAR -->
-    <header class="sticky top-0 z-40 glass border-b" style="border-color:var(--line)">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <div class="text-white p-2 rounded-xl shadow-md w-10 h-10 flex items-center justify-center" style="background:var(--accent)">
-                    <i class="fa-solid fa-palette text-xl"></i>
-                </div>
-                <div>
-                    <h1 class="font-display font-bold text-lg leading-tight">Portafolio ICC</h1>
-                    <p class="text-xs muted">Industrias Culturales y Creativas</p>
-                </div>
-            </div>
-            <div class="flex items-center space-x-4">
-                <span id="totalBadge" class="text-xs font-semibold px-3 py-1 rounded-full hidden sm:inline-block" style="background:color-mix(in srgb,var(--accent) 20%,transparent); color:var(--accent)">8 Proyectos</span>
-                <button id="themeToggle" aria-label="Cambiar tema" class="vbtn" data-cur>
-                    <i class="fa-solid fa-moon dark:hidden"></i><i class="fa-solid fa-sun hidden dark:block text-yellow-400"></i>
-                </button>
-            </div>
-        </div>
-    </header>
+<section class="hero" id="inicio">
+  <div class="pattern" id="pattern"></div>
+  <div class="wrap">
+    <h2>Cultura en <em>movimiento</em></h2>
+    <p class="lead muted">Un espacio para descubrir, crear e inspirar.</p>
+    <a href="#proyectos" class="cta" aria-label="Ir a los proyectos"><i class="fa-solid fa-arrow-down"></i></a>
+  </div>
+</section>
 
-    <!-- HERO SECTION -->
-    <section id="hero" class="relative flex items-center justify-center overflow-hidden px-4" style="min-height:calc(100vh - 4rem); min-height:calc(100svh - 4rem)">
-        <canvas id="fx" class="absolute inset-0 w-full h-full"></canvas>
-        <div class="relative text-center max-w-6xl mx-auto space-y-6">
-            <h2 id="kTitle" class="font-display font-extrabold tracking-tight leading-[.95] text-[clamp(3.2rem,12vw,10rem)]" aria-label="Cultura en movimiento"></h2>
-            <p class="muted text-base sm:text-xl max-w-2xl mx-auto">Un espacio para descubrir, crear e inspirar.</p>
-            <a href="#work" class="cue inline-flex flex-col items-center gap-1 pt-6 muted text-xs" data-cur aria-label="Ir a los proyectos"><i class="fa-solid fa-arrow-down text-xl" style="color:var(--accent)"></i></a>
-        </div>
-    </section>
-
-    <!-- PROYECTOS -->
-    <main id="work" class="flex-grow w-full">
-        <div class="sticky top-16 z-30 glass border-y" style="border-color:var(--line)">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-col lg:flex-row gap-3 lg:items-center">
-                <div class="flex items-center gap-2 lg:w-[28rem]">
-                    <div class="relative flex-1">
-                        <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 muted"></i>
-                        <input type="text" id="searchInput" placeholder="Buscar por título, palabra clave, autor..." class="w-full pl-11 pr-4 py-2.5 rounded-full text-sm outline-none border bg-transparent focus:border-[color:var(--accent)] transition" style="border-color:var(--line); color:var(--ink)">
-                    </div>
-                    <div class="flex gap-2">
-                        <button class="vbtn active" data-view="list" aria-label="Vista de lista" data-cur><i class="fa-solid fa-list"></i></button>
-                        <button class="vbtn" data-view="gallery" aria-label="Vista de galería" data-cur><i class="fa-solid fa-table-cells-large"></i></button>
-                    </div>
-                </div>
-                <div class="tbar flex gap-2 flex-1 overflow-x-auto lg:flex-wrap lg:overflow-visible -mx-4 px-4 lg:mx-0 lg:px-0" id="categoryFilters">
-                    <button data-cat="all" class="filter-btn pill active" data-cur>Todos <span class="count"></span></button>
-                    <button data-cat="apps" class="filter-btn pill" data-cur>Plataformas / Apps <span class="count"></span></button>
-                    <button data-cat="editorial" class="filter-btn pill" data-cur>Editorial &amp; Prensa <span class="count"></span></button>
-                    <button data-cat="games" class="filter-btn pill" data-cur>Videojuegos <span class="count"></span></button>
-                    <button data-cat="branding" class="filter-btn pill" data-cur>Branding &amp; Memoria <span class="count"></span></button>
-                </div>
-            </div>
-        </div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div id="projectsGrid" class="list"></div>
-            <div id="noResults" class="hidden text-center py-16 space-y-3">
-                <i class="fa-solid fa-folder-open text-4xl muted"></i>
-                <p class="muted font-medium">No se encontraron proyectos con ese criterio de búsqueda.</p>
-            </div>
-        </div>
-    </main>
-
-    <!-- DETALLE -->
-    <div id="detail" role="dialog" aria-modal="true" aria-label="Detalle del proyecto">
-        <div class="dbar glass rounded-full p-1">
-            <button id="prevProject" aria-label="Proyecto anterior" data-cur><i class="fa-solid fa-chevron-left"></i></button>
-            <button id="nextProject" aria-label="Proyecto siguiente" data-cur><i class="fa-solid fa-chevron-right"></i></button>
-            <button id="closeModal" aria-label="Cerrar" data-cur><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        <div class="dgrid" id="dgrid">
-            <div class="dmedia" id="dmedia">
-                <img id="modalImage" src="" alt="">
-                <div class="absolute z-[2] left-5 bottom-5">
-                    <span id="modalCategory" class="px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-white bg-black/40 backdrop-blur"></span>
-                </div>
-                <div class="absolute z-[2] left-0 bottom-0 h-1 bg-white/90 transition-all duration-500" id="modalProgress"></div>
-            </div>
-            <div class="dbody" id="modalBody">
-                <div class="max-w-2xl space-y-7">
-                    <h3 id="modalTitle" class="rv font-display font-extrabold leading-[1.02] text-[clamp(2.3rem,5.5vw,4.6rem)]" style="--d:0"></h3>
-                    <div class="rv h-1.5 w-24 rounded-full" style="--d:1; background:var(--accent)"></div>
-                    <div class="rv space-y-2" style="--d:2">
-                        <h4 class="text-xs font-semibold muted uppercase tracking-wider">Descripción del Proyecto</h4>
-                        <p id="modalDescription" class="muted text-base leading-relaxed"></p>
-                    </div>
-                    <div id="modalTeamContainer" class="rv" style="--d:3">
-                        <span class="text-xs font-semibold muted uppercase tracking-wider block mb-1">Integrantes / Autores</span>
-                        <p id="modalTeam" class="text-lg font-semibold"></p>
-                    </div>
-                    <div class="rv flex flex-wrap gap-3 pt-2" id="modalLinks" style="--d:4"></div>
-                </div>
-            </div>
-        </div>
+<div class="tools" id="tools">
+  <div class="wrap">
+    <label class="search"><i class="fa-solid fa-magnifying-glass"></i><input id="q" type="text" placeholder="Buscar por título, palabra clave o autor..." aria-label="Buscar"></label>
+    <div class="pills" id="pills"></div>
+    <div class="views">
+      <button class="icon-btn on" data-view="gallery" aria-label="Vista de galería"><i class="fa-solid fa-table-cells-large"></i></button>
+      <button class="icon-btn" data-view="list" aria-label="Vista de lista"><i class="fa-solid fa-list"></i></button>
     </div>
+  </div>
+</div>
 
-    <!-- FOOTER -->
-    <footer class="border-t py-8 text-center text-xs muted" style="border-color:var(--line)">
-        <p>© Portafolio Académico de Industrias Culturales y Creativas (ICC)</p>
-    </footer>
+<main id="proyectos">
+  <div class="wrap">
+    <div id="grid" class="gallery"></div>
+    <div class="empty muted" id="empty"><i class="fa-solid fa-folder-open"></i><p>No se encontraron proyectos con ese criterio de búsqueda.</p></div>
+  </div>
+</main>
 
-    <script>
-        const projectsData = [
-            {
-                id: 'musica-viva',
-                title: '¡Que la música viva!',
-                category: 'editorial',
-                categoryLabel: 'Artes & Editorial',
-                image: 'img/¡QUÉ LA MÚSICA VIVA!.jpeg',
-                description: 'Este proyecto consiste en una propuesta académico-pedagógica desarrollada en la clase de Industrias Culturales y Creativas que integra un libro interactivo con animación stop-motion con el propósito fundamental de preservar, salvaguardar y difundir el patrimonio musical tradicional de Colombia mediante narrativas ilustradas y exploración sonora. Teóricamente, se clasifica dentro del Campo de las Artes Centrales (Artes Visuales y Patrimonio), articulándose con el Círculo 1 de las Industrias Culturales (Libros, Cine y Video) y con el Círculo 2 de las Industrias Creativas (sector Diseño de interfaces interactivas).',
-                team: 'Ashley Yareni Martinez Florez',
-                links: [
-                    { label: 'Visitar Sitio Web', url: 'https://ashleyotakuuwu-del.github.io/viva-la-musica/', icon: 'fa-globe' }
-                ]
-            },
-            {
-                id: 'bogota-ancestral',
-                title: 'Bogotá Ancestral',
-                category: 'games',
-                categoryLabel: 'Videojuegos',
-                image: 'img/bogota_ancestral.jpeg',
-                description: 'Esta iniciativa plantea un videojuego interactivo en formato 8-bit concebido como un medio de apropiación territorial que invita a la ciudadanía a redescubrir Bogotá desde la perspectiva histórica y cosmológica de sus comunidades indígenas, visibilizando memorias ausentes en los mapas oficiales. Analíticamente, el proyecto se sitúa en el Círculo de las Artes y el Patrimonio como un contenido digital lúdico, promoviendo la diversidad cultural mediante lenguajes tecnológicos contemporáneos.',
-                team: 'Daniela Leguizamón, Vanessa Sandoval, Daniel Vega',
-                links: []
-            },
-            {
-                id: 'compostot',
-                title: 'Compostot',
-                category: 'apps',
-                categoryLabel: 'Diseño & TIC',
-                image: 'img/compostot.jpeg',
-                description: 'El proyecto consiste en un sistema integral de gestión ecológica para parques y conjuntos residenciales enfocado en la economía circular, transformando los residuos orgánicos caninos en abono mediante estaciones inteligentes con sensores IoT, códigos QR y empaques compostables. Bajo el modelo KEA y las ICC, se desarrolla desde el Diseño de Servicio, ubicándose en el Círculo 2 (Industrias Creativas - Diseño) y apoyándose en el Círculo 3 (Industrias Relacionadas - TIC).',
-                team: 'Valentina Rodríguez, Jonathan Ovalle, Alejandro Martín, Yhorman Pinillo',
-                links: [
-                    { label: 'Página Web Oficial', url: 'https://compostot.netlify.app', icon: 'fa-globe' }
-                ]
-            },
-            {
-                id: 'desintoxicados',
-                title: 'Desintoxicados',
-                category: 'editorial',
-                categoryLabel: 'Prensa & Podcast',
-                image: 'img/Desintoxicados.jpeg',
-                description: 'Esta propuesta se define como un medio de comunicación digital independiente orientado a la comunidad estudiantil secundaria, utilizando herramientas de periodismo contemporáneo, storytelling audiovisual y podcasts para visibilizar dinámicas y problemáticas del entorno escolar. Dentro de las ICC, pertenece al Círculo 1 de las Industrias Culturales (Sector Libros y Prensa / Subsector Prensa) al enfocar su actividad en la difusión de contenido informativo digital.',
-                team: 'Laura Suan, Dilan López, Carolina Benavides',
-                links: [
-                    { label: 'Visitar Portal Web', url: 'https://desintoxicados.site/', icon: 'fa-newspaper' }
-                ]
-            },
-            {
-                id: 'historias-barrio',
-                title: 'Historias de Barrio',
-                category: 'branding',
-                categoryLabel: 'Fotografía & Memoria',
-                image: 'img/Historias de barrio.jpeg',
-                description: 'Este proyecto consiste en una propuesta de comunicación visual que busca visibilizar las memorias, identidades y expresiones culturales de los barrios populares de Bogotá (iniciando en Los Laches) mediante fotografía e ilustración, contraponiéndose a los imaginarios urbanos negativos. En el marco de las ICC, se sitúa en el Círculo de Creación (Artes Visuales, Fotografía y Diseño), transformando historias locales en contenidos de valor cultural.',
-                team: 'Luisa Penagos',
-                links: [
-                    { label: 'Visitar Sitio Web', url: 'https://acos71537-stack.github.io/historiasdebarrio/#inicio', icon: 'fa-globe' }
-                ]
-            },
-            {
-                id: 'origenes',
-                title: 'Orígenes',
-                category: 'apps',
-                categoryLabel: 'App & Patrimonio',
-                image: 'img/Orígenes.jpeg',
-                description: 'Esta iniciativa plantea una plataforma tecnológica interactiva orientada a la valorización, preservación y comercialización de la cerámica artesanal colombiana, conectando el saber de los artesanos con los consumidores digitales para dinamizar la economía local. Desde el punto de vista analítico, se clasifica en el Círculo 1 de las Artes Creativas y el Patrimonio por los oficios tradicionales, y en el Círculo 3 de las Industrias Culturales Más Amplias al incorporar herramientas digitales.',
-                team: 'Daniel Galindo, Karen Martínez',
-                links: [
-                    { label: 'Prototipo Figma', url: 'https://www.figma.com/design/oLpqJ5RYZWcq4ZYZD9WnSB/splash-screen-and-onboarding-screen--Community-?node-id=0-1&m=dev&t=WnvhAnPkPA2Z146E-1', icon: 'fa-figma' },
-                    { label: 'Sitio Netlify', url: 'https://origenesdelaceramica.netlify.app', icon: 'fa-globe' }
-                ]
-            },
-            {
-                id: 'raices',
-                title: 'RAÍCES - Memoria de barrio',
-                category: 'branding',
-                categoryLabel: 'Web & Archivo Digital',
-                image: 'img/RAÍCES - memoria de barrio.jpeg',
-                description: 'El proyecto consiste en un archivo visual y plataforma web interactiva diseñada para la recuperación, archivo y divulgación de la memoria histórica local, recopilando relatos, registros fotográficos y material audiovisual que afianzan la identidad barrial. Teóricamente, se enmarca dentro de las Industrias Culturales y de Contenido, aplicando la mediación tecnológica para la conservación del patrimonio inmaterial comunitario.',
-                team: 'Equipo Académico',
-                links: [
-                    { label: 'Visitar Sitio Framer', url: 'https://unreal-phone-491381.framer.app/', icon: 'fa-globe' }
-                ]
-            },
-            {
-                id: 'raiz-laboratorio',
-                title: 'RAÍZ - Laboratorio Patrimonial',
-                category: 'branding',
-                categoryLabel: 'Branding & Identidad',
-                image: 'img/RAÍZ.jpeg',
-                description: 'Esta propuesta plantea una agencia especializada en la creación de marcas patrimoniales para artesanos colombianos, estructurando un modelo de negocio que dota de identidad corporativa, narrativa cultural, empaque especializado y comercio electrónico a los oficios tradicionales. Clasificatoriamente abarca el Círculo 1 (Documentación cultural), el Círculo 2 (Diseño, branding y empaque como núcleo) y el Círculo 3 (Infraestructura de comercio digital).',
-                team: 'Juan Zambrano, Johan Penagos, Jennifer Gonzalez',
-                links: []
-            }
-        ];
+<div id="detail" role="dialog" aria-modal="true" aria-label="Detalle del proyecto">
+  <div class="panel">
+    <div class="pbar">
+      <button class="icon-btn" id="prev" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+      <button class="icon-btn" id="next" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+      <button class="icon-btn" id="close" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="pmedia"><img id="mImg" src="" alt=""><div class="prog" id="mProg"></div></div>
+    <div class="pbody" id="pbody">
+      <span class="tag" id="mCat" style="--c:var(--accent)"></span>
+      <h3 id="mTitle"></h3><div class="rule"></div>
+      <section><span class="lbl">Descripción del Proyecto</span><p id="mDesc"></p></section>
+      <section><span class="lbl">Integrantes / Autores</span><p class="team" id="mTeam"></p></section>
+      <div class="links" id="mLinks"></div>
+    </div>
+  </div>
+</div>
 
-        /* ---------- Estado y utilidades ---------- */
-        const colors = { apps: '#2563eb', editorial: '#d97706', games: '#7c3aed', branding: '#e11d48' };
-        const FALLBACK = 'https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?w=500';
-        const $ = (id) => document.getElementById(id);
-        const grid = $('projectsGrid'), noResults = $('noResults'), detail = $('detail');
-        const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const fine = matchMedia('(hover: hover)').matches;
-        let currentCategory = 'all', searchQuery = '', view = 'list', visible = [], currentId = null;
-        let accent = '#22c55e', mx = -999, my = -999, hasMouse = false;
-        const esc = (s) => s.replace(/"/g, '&quot;');
+<footer><div class="wrap">© Portafolio Académico de Industrias Culturales y Creativas (ICC)</div></footer>
 
-        function setAccent(c) { accent = c; document.documentElement.style.setProperty('--accent', c); }
+<script>
+const projects=[
+{id:'musica-viva',title:'¡Que la música viva!',category:'editorial',label:'Artes & Editorial',image:'img/¡QUÉ LA MÚSICA VIVA!.jpeg',
+description:'Este proyecto consiste en una propuesta académico-pedagógica desarrollada en la clase de Industrias Culturales y Creativas que integra un libro interactivo con animación stop-motion con el propósito fundamental de preservar, salvaguardar y difundir el patrimonio musical tradicional de Colombia mediante narrativas ilustradas y exploración sonora. Teóricamente, se clasifica dentro del Campo de las Artes Centrales (Artes Visuales y Patrimonio), articulándose con el Círculo 1 de las Industrias Culturales (Libros, Cine y Video) y con el Círculo 2 de las Industrias Creativas (sector Diseño de interfaces interactivas).',
+team:'Ashley Yareni Martinez Florez',links:[{label:'Visitar Sitio Web',url:'https://ashleyotakuuwu-del.github.io/viva-la-musica/',icon:'fa-solid fa-globe'}]},
+{id:'bogota-ancestral',title:'Bogotá Ancestral',category:'games',label:'Videojuegos',image:'img/bogota_ancestral.jpeg',
+description:'Esta iniciativa plantea un videojuego interactivo en formato 8-bit concebido como un medio de apropiación territorial que invita a la ciudadanía a redescubrir Bogotá desde la perspectiva histórica y cosmológica de sus comunidades indígenas, visibilizando memorias ausentes en los mapas oficiales. Analíticamente, el proyecto se sitúa en el Círculo de las Artes y el Patrimonio como un contenido digital lúdico, promoviendo la diversidad cultural mediante lenguajes tecnológicos contemporáneos.',
+team:'Daniela Leguizamón, Vanessa Sandoval, Daniel Vega',links:[]},
+{id:'compostot',title:'Compostot',category:'apps',label:'Diseño & TIC',image:'img/compostot.jpeg',
+description:'El proyecto consiste en un sistema integral de gestión ecológica para parques y conjuntos residenciales enfocado en la economía circular, transformando los residuos orgánicos caninos en abono mediante estaciones inteligentes con sensores IoT, códigos QR y empaques compostables. Bajo el modelo KEA y las ICC, se desarrolla desde el Diseño de Servicio, ubicándose en el Círculo 2 (Industrias Creativas - Diseño) y apoyándose en el Círculo 3 (Industrias Relacionadas - TIC).',
+team:'Valentina Rodríguez, Jonathan Ovalle, Alejandro Martín, Yhorman Pinillo',links:[{label:'Página Web Oficial',url:'https://compostot.netlify.app',icon:'fa-solid fa-globe'}]},
+{id:'desintoxicados',title:'Desintoxicados',category:'editorial',label:'Prensa & Podcast',image:'img/Desintoxicados.jpeg',
+description:'Esta propuesta se define como un medio de comunicación digital independiente orientado a la comunidad estudiantil secundaria, utilizando herramientas de periodismo contemporáneo, storytelling audiovisual y podcasts para visibilizar dinámicas y problemáticas del entorno escolar. Dentro de las ICC, pertenece al Círculo 1 de las Industrias Culturales (Sector Libros y Prensa / Subsector Prensa) al enfocar su actividad en la difusión de contenido informativo digital.',
+team:'Laura Suan, Dilan López, Carolina Benavides',links:[{label:'Visitar Portal Web',url:'https://desintoxicados.site/',icon:'fa-solid fa-newspaper'}]},
+{id:'historias-barrio',title:'Historias de Barrio',category:'branding',label:'Fotografía & Memoria',image:'img/Historias de barrio.jpeg',
+description:'Este proyecto consiste en una propuesta de comunicación visual que busca visibilizar las memorias, identidades y expresiones culturales de los barrios populares de Bogotá (iniciando en Los Laches) mediante fotografía e ilustración, contraponiéndose a los imaginarios urbanos negativos. En el marco de las ICC, se sitúa en el Círculo de Creación (Artes Visuales, Fotografía y Diseño), transformando historias locales en contenidos de valor cultural.',
+team:'Luisa Penagos',links:[{label:'Visitar Sitio Web',url:'https://acos71537-stack.github.io/historiasdebarrio/#inicio',icon:'fa-solid fa-globe'}]},
+{id:'origenes',title:'Orígenes',category:'apps',label:'App & Patrimonio',image:'img/Orígenes.jpeg',
+description:'Esta iniciativa plantea una plataforma tecnológica interactiva orientada a la valorización, preservación y comercialización de la cerámica artesanal colombiana, conectando el saber de los artesanos con los consumidores digitales para dinamizar la economía local. Desde el punto de vista analítico, se clasifica en el Círculo 1 de las Artes Creativas y el Patrimonio por los oficios tradicionales, y en el Círculo 3 de las Industrias Culturales Más Amplias al incorporar herramientas digitales.',
+team:'Daniel Galindo, Karen Martínez',links:[{label:'Prototipo Figma',url:'https://www.figma.com/design/oLpqJ5RYZWcq4ZYZD9WnSB/splash-screen-and-onboarding-screen--Community-?node-id=0-1&m=dev&t=WnvhAnPkPA2Z146E-1',icon:'fa-brands fa-figma'},{label:'Sitio Netlify',url:'https://origenesdelaceramica.netlify.app',icon:'fa-solid fa-globe'}]},
+{id:'raices',title:'RAÍCES - Memoria de barrio',category:'branding',label:'Web & Archivo Digital',image:'img/RAÍCES - memoria de barrio.jpeg',
+description:'El proyecto consiste en un archivo visual y plataforma web interactiva diseñada para la recuperación, archivo y divulgación de la memoria histórica local, recopilando relatos, registros fotográficos y material audiovisual que afianzan la identidad barrial. Teóricamente, se enmarca dentro de las Industrias Culturales y de Contenido, aplicando la mediación tecnológica para la conservación del patrimonio inmaterial comunitario.',
+team:'Equipo Académico',links:[{label:'Visitar Sitio Framer',url:'https://unreal-phone-491381.framer.app/',icon:'fa-solid fa-globe'}]},
+{id:'raiz-laboratorio',title:'RAÍZ - Laboratorio Patrimonial',category:'branding',label:'Branding & Identidad',image:'img/RAÍZ.jpeg',
+description:'Esta propuesta plantea una agencia especializada en la creación de marcas patrimoniales para artesanos colombianos, estructurando un modelo de negocio que dota de identidad corporativa, narrativa cultural, empaque especializado y comercio electrónico a los oficios tradicionales. Clasificatoriamente abarca el Círculo 1 (Documentación cultural), el Círculo 2 (Diseño, branding y empaque como núcleo) y el Círculo 3 (Infraestructura de comercio digital).',
+team:'Juan Zambrano, Johan Penagos, Jennifer Gonzalez',links:[]}
+];
+const cats={all:{name:'Todos',c:'#b5472e'},apps:{name:'Plataformas / Apps',c:'#1f6f78'},editorial:{name:'Editorial & Prensa',c:'#b7791f'},games:{name:'Videojuegos',c:'#4b3f8f'},branding:{name:'Branding & Memoria',c:'#b5472e'}};
+const FALLBACK='https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?w=600';
+const $=id=>document.getElementById(id), root=document.documentElement;
+const esc=s=>s.replace(/"/g,'&quot;');
+let cat='all',query='',view='gallery',list=[],cur=null;
 
-        /* ---------- Título cinético ---------- */
-        const kTitle = $('kTitle');
-        kTitle.innerHTML = 'Cultura en movimiento'.split(' ').map(w =>
-            `<span class="w" aria-hidden="true">${[...w].map(c => `<span class="ch">${c}</span>`).join('')}</span>`).join(' ');
-        const chars = [...kTitle.querySelectorAll('.ch')];
+/* Tema */
+try{if(localStorage.getItem('icc-theme')==='dark')root.classList.add('dark')}catch(e){}
+const syncTheme=()=>$('theme').innerHTML='<i class="fa-solid '+(root.classList.contains('dark')?'fa-sun':'fa-moon')+'"></i>';
+syncTheme();
+$('theme').onclick=()=>{root.classList.toggle('dark');syncTheme();try{localStorage.setItem('icc-theme',root.classList.contains('dark')?'dark':'light')}catch(e){}};
 
-        /* ---------- Partículas ---------- */
-        const hero = $('hero'), cv = $('fx'), cx = cv.getContext('2d');
-        let W = 0, H = 0, P = [], heroVisible = true;
-        function sizeFx() {
-            const r = hero.getBoundingClientRect(), d = devicePixelRatio || 1;
-            W = r.width; H = r.height; cv.width = W * d; cv.height = H * d; cx.setTransform(d, 0, 0, d, 0, 0);
-            P = Array.from({ length: W < 640 ? 36 : 85 }, () => ({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - .5) * .5, vy: (Math.random() - .5) * .5, r: Math.random() * 2 + 1 }));
-        }
-        sizeFx(); addEventListener('resize', sizeFx);
-        new IntersectionObserver(([e]) => heroVisible = e.isIntersecting).observe(hero);
-        const hexRgb = (h) => { const n = parseInt(h.slice(1), 16); return [n >> 16, (n >> 8) & 255, n & 255]; };
+/* Acento según categoría */
+const setAccent=c=>root.style.setProperty('--accent',c);
 
-        function drawFx() {
-            cx.clearRect(0, 0, W, H);
-            const [r, g, b] = hexRgb(accent), rect = hero.getBoundingClientRect();
-            const hx = mx - rect.left, hy = my - rect.top;
-            for (const p of P) {
-                p.x += p.vx; p.y += p.vy;
-                if (p.x < 0 || p.x > W) p.vx *= -1;
-                if (p.y < 0 || p.y > H) p.vy *= -1;
-                const dx = hx - p.x, dy = hy - p.y, d = Math.hypot(dx, dy);
-                if (d < 200) { p.x += dx * .012 * (1 - d / 200); p.y += dy * .012 * (1 - d / 200); }
-                cx.fillStyle = `rgba(${r},${g},${b},.8)`;
-                cx.beginPath(); cx.arc(p.x, p.y, p.r, 0, 6.283); cx.fill();
-                if (d < 200) { cx.strokeStyle = `rgba(${r},${g},${b},${(1 - d / 200) * .7})`; cx.beginPath(); cx.moveTo(p.x, p.y); cx.lineTo(hx, hy); cx.stroke(); }
-            }
-            for (let i = 0; i < P.length; i++) for (let j = i + 1; j < P.length; j++) {
-                const d = Math.hypot(P[i].x - P[j].x, P[i].y - P[j].y);
-                if (d < 120) { cx.strokeStyle = `rgba(${r},${g},${b},${(1 - d / 120) * .35})`; cx.beginPath(); cx.moveTo(P[i].x, P[i].y); cx.lineTo(P[j].x, P[j].y); cx.stroke(); }
-            }
-        }
+/* Filtros */
+$('pills').innerHTML=Object.entries(cats).map(([k,v])=>{
+  const n=k==='all'?projects.length:projects.filter(p=>p.category===k).length;
+  return `<button class="pill${k==='all'?' active':''}" data-cat="${k}" style="--c:${v.c}"><i></i>${v.name} <b>${n}</b></button>`}).join('');
+$('pills').onclick=e=>{const b=e.target.closest('.pill');if(!b)return;
+  document.querySelectorAll('.pill').forEach(x=>x.classList.remove('active'));b.classList.add('active');
+  cat=b.dataset.cat;setAccent(cats[cat].c);render()};
+$('q').oninput=e=>{query=e.target.value.toLowerCase().trim();render()};
+document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('[data-view]').forEach(x=>x.classList.remove('on'));b.classList.add('on');view=b.dataset.view;render()});
 
-        /* ---------- Cursor, vista previa y bucle principal ---------- */
-        const cursor = $('cursor'), peek = $('peek'), peekImg = $('peekImg');
-        let c = { x: innerWidth / 2, y: innerHeight / 2 }, pk = { x: 0, y: 0, rot: 0 }, lastY = scrollY, sv = 0;
+/* Render */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});
+function render(){
+  list=projects.filter(p=>(cat==='all'||p.category===cat)&&(p.title+p.description+p.team+p.label).toLowerCase().includes(query));
+  const g=$('grid');g.className=view;
+  $('empty').style.display=list.length?'none':'block';
+  
+  g.innerHTML=list.map(p=>`<article class="card" tabindex="0" role="button" data-id="${p.id}" style="--c:${cats[p.category].c}" aria-label="${esc(p.title)}">
+    <div class="thumb"><img src="${p.image}" alt="${esc(p.title)}" loading="lazy" onerror="this.onerror=null;this.src='${FALLBACK}'"></div>
+    <div class="body"><span class="tag">${p.label}</span><h3>${p.title}</h3><p>${p.description}</p>
+    <span class="more">Ver detalle completo <i class="fa-solid fa-arrow-right"></i></span></div></article>`).join('');
+  g.querySelectorAll('.card').forEach((el,i)=>{el.style.transitionDelay=(i%3)*80+'ms';io.observe(el)});
+}
+$('grid').onclick=e=>{const c=e.target.closest('.card');if(c)open(c.dataset.id)};
+$('grid').onkeydown=e=>{const c=e.target.closest('.card');if(c&&(e.key==='Enter'||e.key===' ')){e.preventDefault();open(c.dataset.id)}};
 
-        addEventListener('pointermove', (e) => { mx = e.clientX; my = e.clientY; hasMouse = true; });
-        document.addEventListener('mouseover', (e) => cursor.classList.toggle('big', !!e.target.closest('[data-cur], .row, .tile')));
+/* Detalle */
+function fill(p){
+  const col=cats[p.category].c;
+  $('detail').style.setProperty('--accent',col);
+  $('mCat').textContent=p.label;$('mTitle').textContent=p.title;
+  $('mDesc').textContent=p.description;$('mTeam').textContent=p.team;
+  const im=$('mImg');im.onerror=()=>{im.onerror=null;im.src=FALLBACK};im.src=p.image;im.alt=p.title;
+  const l=list.length?list:projects;
+  $('mProg').style.width=((l.findIndex(x=>x.id===p.id)+1)/l.length*100)+'%';
+  $('mLinks').innerHTML=p.links.length?p.links.map(k=>`<a class="link" href="${k.url}" target="_blank" rel="noopener"><i class="${k.icon}"></i>${k.label}</a>`).join(''):'<span class="muted" style="font-size:.85rem;font-style:italic">Este proyecto no cuenta con enlaces externos activos.</span>';
+  $('pbody').scrollTop=0;
+}
+function open(id){cur=projects.find(p=>p.id===id);if(!cur)return;fill(cur);$('detail').classList.add('open');document.body.style.overflow='hidden';setTimeout(()=>$('close').focus(),300)}
+function close(){$('detail').classList.remove('open');document.body.style.overflow='';cur=null}
+function step(d){const l=list.length?list:projects;const i=l.findIndex(p=>p.id===cur.id);cur=l[(i+d+l.length)%l.length];fill(cur);
+  $('detail').querySelector('.panel').animate([{opacity:.3,transform:`translateX(${d*30}px)`},{opacity:1,transform:'none'}],{duration:380,easing:'cubic-bezier(.2,.8,.2,1)'})}
+$('close').onclick=close;$('prev').onclick=()=>step(-1);$('next').onclick=()=>step(1);
+$('detail').onclick=e=>{if(e.target.id==='detail')close()};
+document.addEventListener('keydown',e=>{if(!cur)return;if(e.key==='Escape')close();if(e.key==='ArrowLeft')step(-1);if(e.key==='ArrowRight')step(1)});
 
-        function loop(t) {
-            if (fine) {
-                c.x += (mx - c.x) * .22; c.y += (my - c.y) * .22;
-                cursor.style.transform = `translate3d(${c.x}px,${c.y}px,0)`;
-                const px = mx + 36, py = my - 170, vx = px - pk.x;
-                pk.x += vx * .12; pk.y += (py - pk.y) * .12; pk.rot += (Math.max(-14, Math.min(14, vx * .25)) - pk.rot) * .15;
-                peek.style.transform = `translate3d(${pk.x}px,${pk.y}px,0) rotate(${pk.rot}deg)`;
-            }
-            if (!reduce) {
-                if (heroVisible) {
-                    drawFx();
-                    chars.forEach((ch, i) => {
-                        const r = ch.getBoundingClientRect();
-                        const d = Math.hypot(mx - (r.left + r.width / 2), my - (r.top + r.height / 2));
-                        const prox = hasMouse ? Math.max(0, 1 - d / 280) : 0;
-                        const wave = (Math.sin(t / 650 + i * .5) + 1) / 2;
-                        ch.style.fontVariationSettings = `'wght' ${(380 + wave * 160 + prox * 260) | 0}`;
-                        ch.style.transform = `translateY(${-prox * 16}px)`;
-                        ch.style.color = prox > .04 ? `color-mix(in srgb, var(--accent) ${(prox * 100) | 0}%, var(--ink))` : '';
-                    });
-                }
-            }
-            requestAnimationFrame(loop);
-        }
-        requestAnimationFrame(loop);
+/* Scroll: barra de progreso y patrón con parallax suave */
+addEventListener('scroll',()=>{
+  $('bar').style.width=(scrollY/(root.scrollHeight-innerHeight)*100)+'%';
+  $('pattern').style.transform=`translateY(${scrollY*.12}px)`;
+},{passive:true});
 
-        addEventListener('scroll', () => {
-            $('scrollbar').style.width = (scrollY / (document.documentElement.scrollHeight - innerHeight) * 100) + '%';
-        }, { passive: true });
 
-        /* ---------- Render de proyectos ---------- */
-        const io = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 });
-
-        function render(data) {
-            visible = data;
-            grid.className = view;
-            noResults.classList.toggle('hidden', data.length > 0);
-            grid.innerHTML = data.map(p => view === 'list' ? `
-                <div class="row" tabindex="0" role="button" data-id="${p.id}" aria-label="${esc(p.title)}">
-                    <img class="rthumb" src="${p.image}" alt="${esc(p.title)}" loading="lazy" onerror="this.onerror=null;this.src='${FALLBACK}'">
-                    <h3 class="rtitle">${p.title}</h3>
-                    <span class="rcat">${p.categoryLabel}</span>
-                    <p class="rdesc muted">${p.description}</p>
-                    <span class="rgo">Ver detalle completo <i class="fa-solid fa-arrow-right"></i></span>
-                </div>` : `
-                <div class="tile" tabindex="0" role="button" data-id="${p.id}" aria-label="${esc(p.title)}">
-                    <div class="ti"><img src="${p.image}" alt="${esc(p.title)}" loading="lazy" onerror="this.onerror=null;this.src='${FALLBACK}'"></div>
-                    <div class="tt"><span>${p.categoryLabel}</span><h3>${p.title}</h3><small>Ver detalle completo <i class="fa-solid fa-arrow-right"></i></small></div>
-                </div>`).join('');
-            grid.querySelectorAll('[data-id]').forEach((el, i) => {
-                const p = data[i];
-                el.style.setProperty('--rc', colors[p.category]);
-                el.style.transitionDelay = (i % 4) * 70 + 'ms';
-                io.observe(el);
-            });
-            peek.classList.remove('show');
-        }
-
-        function filterProjects() {
-            render(projectsData.filter(p => {
-                const matchesCat = currentCategory === 'all' || p.category === currentCategory;
-                const matchesSearch = p.title.toLowerCase().includes(searchQuery) ||
-                                      p.description.toLowerCase().includes(searchQuery) ||
-                                      p.team.toLowerCase().includes(searchQuery);
-                return matchesCat && matchesSearch;
-            }));
-        }
-
-        grid.addEventListener('click', (e) => { const el = e.target.closest('[data-id]'); if (el) openModal(el.dataset.id, e.clientX, e.clientY); });
-        grid.addEventListener('keydown', (e) => {
-            const el = e.target.closest('[data-id]');
-            if (el && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); const r = el.getBoundingClientRect(); openModal(el.dataset.id, r.left + r.width / 2, r.top + r.height / 2); }
-        });
-        grid.addEventListener('mouseover', (e) => {
-            const row = e.target.closest('.row');
-            if (!row || !fine) return;
-            peekImg.onerror = () => { peekImg.onerror = null; peekImg.src = FALLBACK; };
-            peekImg.src = projectsData.find(p => p.id === row.dataset.id).image;
-            peek.classList.add('show');
-        });
-        grid.addEventListener('mouseleave', () => peek.classList.remove('show'));
-
-        /* ---------- Detalle ---------- */
-        function fillModal(p) {
-            detail.style.setProperty('--accent', colors[p.category]);
-            const img = $('modalImage');
-            img.onerror = () => { img.onerror = null; img.src = FALLBACK; };
-            img.src = p.image; img.alt = p.title;
-            $('modalTitle').textContent = p.title;
-            $('modalCategory').textContent = p.categoryLabel;
-            $('modalDescription').textContent = p.description;
-            $('modalTeam').textContent = p.team;
-            const lc = $('modalLinks'); lc.innerHTML = '';
-            if (p.links && p.links.length) {
-                p.links.forEach(l => {
-                    const a = document.createElement('a');
-                    a.href = l.url; a.target = '_blank'; a.rel = 'noopener'; a.className = 'link-btn'; a.dataset.cur = '';
-                    const icon = l.icon || 'fa-link', fam = icon === 'fa-figma' ? 'fa-brands' : 'fa-solid';
-                    a.innerHTML = `<i class="${fam} ${icon}"></i> <span>${l.label}</span>`;
-                    lc.appendChild(a);
-                });
-            } else {
-                lc.innerHTML = `<span class="text-sm muted italic">Este proyecto no cuenta con enlaces externos activos.</span>`;
-            }
-            const list = visible.length ? visible : projectsData;
-            $('modalProgress').style.width = ((list.findIndex(x => x.id === p.id) + 1) / list.length * 100) + '%';
-            $('modalBody').scrollTop = 0;
-        }
-
-        function openModal(id, x, y) {
-            const p = projectsData.find(q => q.id === id); if (!p) return;
-            currentId = id; fillModal(p);
-            detail.style.setProperty('--ox', x + 'px'); detail.style.setProperty('--oy', y + 'px');
-            detail.classList.add('open'); document.body.style.overflow = 'hidden';
-            peek.classList.remove('show');
-            setTimeout(() => $('closeModal').focus(), 400);
-        }
-        function closeModal() {
-            detail.classList.remove('open'); document.body.style.overflow = ''; currentId = null;
-        }
-        function step(dir) {
-            const list = visible.length ? visible : projectsData;
-            const i = list.findIndex(p => p.id === currentId);
-            const next = list[(i + dir + list.length) % list.length];
-            currentId = next.id; fillModal(next);
-            $('dgrid').animate([{ opacity: .2, transform: `translateX(${dir * 40}px)` }, { opacity: 1, transform: 'none' }], { duration: 450, easing: 'cubic-bezier(.2,.8,.2,1)' });
-        }
-        $('closeModal').onclick = closeModal;
-        $('prevProject').onclick = () => step(-1);
-        $('nextProject').onclick = () => step(1);
-        document.addEventListener('keydown', (e) => {
-            if (!currentId) return;
-            if (e.key === 'Escape') closeModal();
-            if (e.key === 'ArrowLeft') step(-1);
-            if (e.key === 'ArrowRight') step(1);
-        });
-        $('dmedia').addEventListener('pointermove', (e) => {
-            const r = e.currentTarget.getBoundingClientRect();
-            $('modalImage').style.transform = `translate(${-((e.clientX - r.left) / r.width - .5) * 12}px, ${-((e.clientY - r.top) / r.height - .5) * 12}px)`;
-        });
-
-        /* ---------- Filtros, vista, búsqueda y tema ---------- */
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            const cat = btn.dataset.cat;
-            btn.querySelector('.count').textContent = cat === 'all' ? projectsData.length : projectsData.filter(p => p.category === cat).length;
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                currentCategory = cat;
-                setAccent(cat === 'all' ? '#22c55e' : colors[cat]);
-                filterProjects();
-            });
-        });
-        $('totalBadge').textContent = projectsData.length + ' Proyectos';
-
-        document.querySelectorAll('[data-view]').forEach(b => b.addEventListener('click', () => {
-            document.querySelectorAll('[data-view]').forEach(x => x.classList.remove('active'));
-            b.classList.add('active'); view = b.dataset.view; filterProjects();
-        }));
-
-        $('searchInput').addEventListener('input', (e) => { searchQuery = e.target.value.toLowerCase(); filterProjects(); });
-
-        try { if (localStorage.getItem('icc-theme') === 'light') document.documentElement.classList.remove('dark'); } catch (e) {}
-        $('themeToggle').addEventListener('click', () => {
-            const dark = document.documentElement.classList.toggle('dark');
-            try { localStorage.setItem('icc-theme', dark ? 'dark' : 'light'); } catch (e) {}
-        });
-
-        render(projectsData);
-    </script>
+$('badge').textContent=projects.length+' Proyectos';
+render();
+</script>
 </body>
 </html>
