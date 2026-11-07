@@ -98,7 +98,7 @@
         </div>
     </main>
 
-    <!-- MODAL DE DETALLE -->
+    <!-- MODAL DE DETALLE (UNIFICADO EN UN SOLO BLOQUE) -->
     <div id="projectModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-white dark:bg-gray-800 rounded-2xl max-w-2xl w-full overflow-hidden shadow-2xl transform transition-all max-h-[90vh] flex flex-col">
             <div class="relative h-48 sm:h-64 bg-gray-100 dark:bg-gray-900 flex-shrink-0">
@@ -114,14 +114,10 @@
             <div class="p-6 overflow-y-auto space-y-4 flex-grow">
                 <h3 id="modalTitle" class="text-2xl font-bold text-gray-900 dark:text-white"></h3>
                 
+                <!-- Única descripción unificada -->
                 <div class="space-y-2">
                     <h4 class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Descripción del Proyecto</h4>
                     <p id="modalDescription" class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed whitespace-pre-line"></p>
-                </div>
-
-                <div class="space-y-2">
-                    <h4 class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Clasificación & Contexto ICC</h4>
-                    <p id="modalDetails" class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed bg-gray-50 dark:bg-gray-900/50 p-3 rounded-lg border border-gray-100 dark:border-gray-700/50 whitespace-pre-line"></p>
                 </div>
 
                 <div id="modalTeamContainer" class="pt-2">
@@ -141,7 +137,7 @@
         <p>© Portafolio Académico de Industrias Culturales y Creativas (ICC)</p>
     </footer>
 
-    <!-- JAVASCRIPT CON DATOS TÉCNICOS EN PÁRRAFO CONTINUO -->
+    <!-- JAVASCRIPT CON TEXTOS UNIFICADOS EN UN SOLO PÁRRAFO -->
     <script>
         const projectsData = [
             {
@@ -150,8 +146,7 @@
                 category: 'editorial',
                 categoryLabel: 'Artes & Editorial',
                 image: 'img/¡QUÉ LA MÚSICA VIVA!.jpeg',
-                description: 'Propuesta académico-pedagógica desarrollada en el marco de la asignatura de Industrias Culturales y Creativas que integra un libro interactivo con animación stop-motion cuyo propósito fundamental es la preservación, salvaguarda y difusión del patrimonio musical e instrumental tradicional de Colombia mediante narrativas ilustradas y exploración sonora.',
-                details: 'Este proyecto se clasifica teóricamente dentro del Campo de las Artes Centrales en el sector de Artes Visuales y del Patrimonio Cultural, articulándose además con el Círculo 1 de las Industrias Culturales en los sectores de Libros y Prensa y de Cine y Video debido a su formato editorial y audiovisual, y vinculándose con el Círculo 2 de las Industrias y Actividades Creativas en el sector Diseño, enfocado en el desarrollo de interfaces y experiencias digitales interactivas para la mediación pedagógica.',
+                description: 'Propuesta académico-pedagógica desarrollada en el marco de la asignatura de Industrias Culturales y Creativas que integra un libro interactivo con animación stop-motion cuyo propósito fundamental es la preservación, salvaguarda y difusión del patrimonio musical e instrumental tradicional de Colombia mediante narrativas ilustradas y exploración sonora. Teóricamente, este proyecto se clasifica dentro del Campo de las Artes Centrales en el sector de Artes Visuales y del Patrimonio Cultural, articulándose además con el Círculo 1 de las Industrias Culturales en los sectores de Libros y Prensa y de Cine y Video debido a su formato editorial y audiovisual, y vinculándose con el Círculo 2 de las Industrias y Actividades Creativas en el sector Diseño, enfocado en el desarrollo de interfaces y experiencias digitales interactivas para la mediación pedagógica.',
                 team: 'Ashley Yareni Martinez Florez',
                 links: [
                     { label: 'Visitar Sitio Web', url: 'https://ashleyotakuuwu-del.github.io/viva-la-musica/', icon: 'fa-globe' }
@@ -163,8 +158,7 @@
                 category: 'games',
                 categoryLabel: 'Videojuegos',
                 image: 'img/bogota_ancestral.jpeg',
-                description: 'Videojuego desarrollado en formato estético 8-bit concebido como un medio interactivo de apropiación territorial que invita a la ciudadanía a redescubrir Bogotá desde la perspectiva histórica y cosmológica de sus comunidades indígenas, visibilizando memorias y espacios ausentes en la cartografía oficial.',
-                details: 'El proyecto se sitúa en el Círculo de las Artes y el Patrimonio como un contenido digital interactivo y lúdico, integrándose en las Industrias Creativas y Tecnológicas al promover la diversidad cultural, el rescate patrimonial y la identidad urbana mediante lenguajes contemporáneos de alto impacto social y pedagógico.',
+                description: 'Videojuego desarrollado en formato estético 8-bit concebido como un medio interactivo de apropiación territorial que invita a la ciudadanía a redescubrir Bogotá desde la perspectiva histórica y cosmológica de sus comunidades indígenas, visibilizando memorias y espacios ausentes en la cartografía oficial. Analíticamente, el proyecto se sitúa en el Círculo de las Artes y el Patrimonio como un contenido digital interactivo y lúdico, integrándose en las Industrias Creativas y Tecnológicas al promover la diversidad cultural, el rescate patrimonial y la identidad urbana mediante lenguajes contemporáneos de alto impacto social y pedagógico.',
                 team: 'Daniela Leguizamón, Vanessa Sandoval, Daniel Vega',
                 links: []
             },
@@ -174,8 +168,7 @@
                 category: 'apps',
                 categoryLabel: 'Diseño & TIC',
                 image: 'img/compostot.jpeg',
-                description: 'Sistema integral de gestión ecológica e inteligente para parques y conjuntos residenciales enfocado en la economía circular, transformando los residuos orgánicos caninos en abono mediante estaciones con sensores IoT, códigos QR y empaques compostables.',
-                details: 'Bajo el modelo KEA y las ICC, este proyecto se desarrolla desde el Diseño de Servicio articulando identidad de marca, ergonomía urbana e interfaces UX/UI ubicándose principalmente en el Círculo 2 de las Industrias Creativas en el sector Diseño, y apoyándose en el Círculo 3 de las Industrias Relacionadas mediante infraestructura móvil, hardware inteligente y conectividad IoT.',
+                description: 'Sistema integral de gestión ecológica e inteligente para parques y conjuntos residenciales enfocado en la economía circular, transformando los residuos orgánicos caninos en abono mediante estaciones con sensores IoT, códigos QR y empaques compostables. Bajo el modelo KEA y las ICC, este proyecto se desarrolla desde el Diseño de Servicio articulando identidad de marca, ergonomía urbana e interfaces UX/UI ubicándose principalmente en el Círculo 2 de las Industrias Creativas en el sector Diseño, y apoyándose en el Círculo 3 de las Industrias Relacionadas mediante infraestructura móvil, hardware inteligente y conectividad IoT.',
                 team: 'Valentina Rodríguez, Jonathan Ovalle, Alejandro Martín, Yhorman Pinillo',
                 links: [
                     { label: 'Página Web Oficial', url: 'https://compostot.netlify.app', icon: 'fa-globe' }
@@ -187,8 +180,7 @@
                 category: 'editorial',
                 categoryLabel: 'Prensa & Podcast',
                 image: 'img/Desintoxicados.jpeg',
-                description: 'Medio de comunicación digital independiente orientado a la comunidad estudiantil secundaria que utiliza herramientas del periodismo contemporáneo, storytelling audiovisual y formatos podcast para visibilizar realidades, necesidades y dinámicas del entorno escolar.',
-                details: 'Este proyecto pertenece al Círculo 1 de las Industrias Culturales en el sector de Libros y Prensa, subsector Prensa y Medios Escritos y Digitales, estando enfocado analíticamente en la producción, gestión y circulación masiva de contenidos informativos orientados a la formación de opinión crítica juvenil.',
+                description: 'Medio de comunicación digital independiente orientado a la comunidad estudiantil secundaria que utiliza herramientas del periodismo contemporáneo, storytelling audiovisual y formatos podcast para visibilizar realidades, necesidades y dinámicas del entorno escolar. Analíticamente, este proyecto pertenece al Círculo 1 de las Industrias Culturales en el sector de Libros y Prensa, subsector Prensa y Medios Escritos y Digitales, estando enfocado en la producción, gestión y circulación masiva de contenidos informativos orientados a la formación de opinión crítica juvenil.',
                 team: 'Laura Suan, Dilan López, Carolina Benavides',
                 links: [
                     { label: 'Visitar Portal Web', url: 'https://desintoxicados.site/', icon: 'fa-newspaper' }
@@ -200,8 +192,7 @@
                 category: 'branding',
                 categoryLabel: 'Fotografía & Memoria',
                 image: 'img/historias_barrio.jpeg',
-                description: 'Proyecto de comunicación visual y salvaguarda patrimonial enfocado en documentar y dignificar las memorias e identidades de los barrios populares de Bogotá, iniciando en Los Laches, contraponiéndose de este modo a los estigmas e imaginarios urbanos negativos.',
-                details: 'Se ubica analíticamente en el Campo de Creación Visual mediante la articulación de la fotografía documental, la ilustración gráfica y los soportes digitales, generando activos simbólicos de alto potencial para su circulación en exposiciones editoriales y plataformas digitales comunitarias.',
+                description: 'Proyecto de comunicación visual y salvaguarda patrimonial enfocado en documentar y dignificar las memorias e identidades de los barrios populares de Bogotá, iniciando en Los Laches, contraponiéndose de este modo a los estigmas e imaginarios urbanos negativos. El proyecto se ubica analíticamente en el Campo de Creación Visual mediante la articulación de la fotografía documental, la ilustración gráfica y los soportes digitales, generando activos simbólicos de alto potencial para su circulación en exposiciones editoriales y plataformas digitales comunitarias.',
                 team: 'Equipo Académico',
                 links: []
             },
@@ -211,8 +202,7 @@
                 category: 'apps',
                 categoryLabel: 'App & Patrimonio',
                 image: 'img/Orígenes.jpeg',
-                description: 'Plataforma tecnológica interactiva orientada a la valorización, preservación y comercialización de la cerámica artesanal colombiana que conecta el saber ancestral de los artesanos con los consumidores digitales para dinamizar la economía local y el patrimonio.',
-                details: 'El proyecto se clasifica en el Círculo 1 de las Artes Creativas y el Patrimonio por su enfoque en los oficios artesanales tradicionales, y se relaciona estrechamente con el Círculo 3 de las Industrias Culturales Más Amplias al incorporar arquitecturas de software y experiencias de usuario para la comercialización justa.',
+                description: 'Plataforma tecnológica interactiva orientada a la valorización, preservación y comercialización de la cerámica artesanal colombiana que conecta el saber ancestral de los artesanos con los consumidores digitales para dinamizar la economía local y el patrimonio. Desde el punto de vista analítico, el proyecto se clasifica en el Círculo 1 de las Artes Creativas y el Patrimonio por su enfoque en los oficios artesanales tradicionales, relacionándose estrechamente con el Círculo 3 de las Industrias Culturales Más Amplias al incorporar arquitecturas de software y experiencias de usuario para la comercialización justa.',
                 team: 'Daniel Galindo, Karen Martínez',
                 links: [
                     { label: 'Prototipo Figma', url: 'https://www.figma.com/design/oLpqJ5RYZWcq4ZYZD9WnSB/splash-screen-and-onboarding-screen--Community-?node-id=0-1&m=dev&t=WnvhAnPkPA2Z146E-1', icon: 'fa-figma' },
@@ -225,8 +215,7 @@
                 category: 'branding',
                 categoryLabel: 'Web & Archivo Digital',
                 image: 'img/RAÍCES - memoria de barrio.jpeg',
-                description: 'Archivo visual y plataforma web interactiva diseñada para la recuperación, archivo y divulgación de la memoria histórica local, recopilando relatos, registros fotográficos y material audiovisual que afianzan la identidad barrial comunitaria.',
-                details: 'Se enmarca dentro de las Industrias Culturales y de Contenido aplicando la mediación tecnológica para la conservación del patrimonio inmaterial a través del uso de arquitecturas web orientadas a la gestión documental comunitaria.',
+                description: 'Archivo visual y plataforma web interactiva diseñada para la recuperación, archivo y divulgación de la memoria histórica local, recopilando relatos, registros fotográficos y material audiovisual que afianzan la identidad barrial comunitaria. Teóricamente, se enmarca dentro de las Industrias Culturales y de Contenido aplicando la mediación tecnológica para la conservación del patrimonio inmaterial a través del uso de arquitecturas web orientadas a la gestión documental comunitaria.',
                 team: 'Equipo Académico',
                 links: [
                     { label: 'Enlace Canva', url: 'https://canva.link/1il5at60k2at4tq', icon: 'fa-arrow-up-right-from-square' }
@@ -238,8 +227,7 @@
                 category: 'branding',
                 categoryLabel: 'Branding & Identidad',
                 image: 'img/RAÍZ.jpeg',
-                description: 'Agencia especializada en la creación de marcas patrimoniales para artesanos colombianos que estructura un modelo de negocio dotando de identidad corporativa, narrativa cultural, packaging especializado y canales de comercio electrónico a los oficios tradicionales.',
-                details: 'Clasificatoriamente abarca el Círculo 1 de las Industrias Culturales mediante la documentación audiovisual y literaria de saberes, el Círculo 2 de las Industrias Creativas como núcleo de diseño estratégico, identidad visual, packaging y branding humanizado, y el Círculo 3 de Soporte Digital mediante infraestructura de tiendas virtuales para comercio directo.',
+                description: 'Agencia especializada en la creación de marcas patrimoniales para artesanos colombianos que estructura un modelo de negocio dotando de identidad corporativa, narrativa cultural, packaging especializado y canales de comercio electrónico a los oficios tradicionales. Clasificatoriamente, este proyecto abarca el Círculo 1 de las Industrias Culturales mediante la documentación audiovisual y literaria de saberes, el Círculo 2 de las Industrias Creativas como núcleo de diseño estratégico, identidad visual, packaging y branding humanizado, y el Círculo 3 de Soporte Digital mediante infraestructura de tiendas virtuales para comercio directo.',
                 team: 'Juan Zambrano, Johan Penagos, Jennifer Gonzalez',
                 links: []
             }
@@ -298,7 +286,6 @@
             document.getElementById('modalTitle').textContent = project.title;
             document.getElementById('modalCategory').textContent = project.categoryLabel;
             document.getElementById('modalDescription').textContent = project.description;
-            document.getElementById('modalDetails').textContent = project.details;
             document.getElementById('modalTeam').textContent = project.team;
 
             const linksContainer = document.getElementById('modalLinks');
