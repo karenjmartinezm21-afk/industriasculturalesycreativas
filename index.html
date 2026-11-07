@@ -4,139 +4,203 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portafolio ICC - Industrias Culturales y Creativas</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
+                    fontFamily: {
+                        display: ['"Bricolage Grotesque"', 'system-ui', 'sans-serif'],
+                        sans: ['"Instrument Sans"', 'system-ui', 'sans-serif']
+                    },
                     colors: {
-                        brand: {
-                            50: '#f0fdf4',
-                            100: '#dcfce7',
-                            500: '#22c55e',
-                            600: '#16a34a',
-                            700: '#15803d',
-                            900: '#14532d',
-                        }
+                        brand: { 50:'#f0fdf4', 100:'#dcfce7', 500:'#22c55e', 600:'#16a34a', 700:'#15803d', 900:'#14532d' }
                     }
                 }
             }
         }
     </script>
-    <!-- FontAwesome icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg: #f4f7f4; --surface: #ffffff; --ink: #14231a; --muted: #5b6b61; --line: #dfe7e0;
+            --c-apps: #2563eb; --c-editorial: #d97706; --c-games: #7c3aed; --c-branding: #e11d48;
+        }
+        .dark {
+            --bg: #0b130e; --surface: #121e16; --ink: #eaf3ec; --muted: #9db0a3; --line: #223329;
+        }
+        body { background: var(--bg); color: var(--ink); font-family: 'Instrument Sans', system-ui, sans-serif; }
+        .font-display { font-family: 'Bricolage Grotesque', system-ui, sans-serif; }
+        .muted { color: var(--muted); }
+        .surface { background: var(--surface); border: 1px solid var(--line); }
+
+        /* Hero con manchas de color en movimiento */
+        .hero { position: relative; overflow: hidden; isolation: isolate; }
+        .blob { position: absolute; border-radius: 9999px; filter: blur(70px); opacity: .35; z-index: -1; animation: drift 18s ease-in-out infinite alternate; }
+        .dark .blob { opacity: .25; }
+        .blob.b1 { width: 340px; height: 340px; background: var(--c-apps); top: -90px; left: 6%; }
+        .blob.b2 { width: 300px; height: 300px; background: var(--c-editorial); top: 10px; right: 8%; animation-delay: -6s; }
+        .blob.b3 { width: 320px; height: 320px; background: var(--c-branding); bottom: -140px; left: 38%; animation-delay: -11s; }
+        .blob.b4 { width: 260px; height: 260px; background: #22c55e; bottom: -80px; right: 28%; animation-delay: -3s; }
+        @keyframes drift { from { transform: translate(0,0) scale(1); } to { transform: translate(60px,40px) scale(1.18); } }
+
+        .hero-title { background: linear-gradient(100deg, var(--ink) 30%, #16a34a 55%, var(--ink) 80%); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shine 7s linear infinite; }
+        @keyframes shine { to { background-position: 200% center; } }
+
+        /* Filtros */
+        .filter-btn { display: inline-flex; align-items: center; gap: .45rem; padding: .45rem .95rem; border-radius: 9999px; font-size: .78rem; font-weight: 600; background: var(--surface); border: 1px solid var(--line); color: var(--muted); transition: all .25s; }
+        .filter-btn:hover { transform: translateY(-2px); color: var(--ink); }
+        .filter-btn .count { font-size: .68rem; padding: .05rem .4rem; border-radius: 9999px; background: var(--line); color: var(--muted); }
+        .filter-btn.active { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+        .filter-btn.active .count { background: rgba(255,255,255,.2); color: inherit; }
+        .dark .filter-btn.active .count { background: rgba(0,0,0,.2); }
+
+        /* Tarjetas */
+        .card { --accent: #16a34a; position: relative; border-radius: 1.25rem; overflow: hidden; background: var(--surface); border: 1px solid var(--line);
+                display: flex; flex-direction: column; cursor: pointer; transform-style: preserve-3d; transition: transform .2s ease-out, box-shadow .3s, border-color .3s;
+                opacity: 0; animation: rise .6s cubic-bezier(.2,.7,.2,1) forwards; animation-delay: calc(var(--i) * 70ms); }
+        @keyframes rise { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+        .card::before { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; opacity: 0; transition: opacity .3s;
+                background: radial-gradient(380px circle at var(--mx,50%) var(--my,50%), color-mix(in srgb, var(--accent) 22%, transparent), transparent 60%); }
+        .card:hover::before { opacity: 1; }
+        .card:hover { box-shadow: 0 24px 50px -22px color-mix(in srgb, var(--accent) 70%, transparent); border-color: color-mix(in srgb, var(--accent) 55%, var(--line)); }
+        .card .media { position: relative; height: 11.5rem; overflow: hidden; background: var(--line); }
+        .card .media img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s cubic-bezier(.2,.7,.2,1); }
+        .card:hover .media img { transform: scale(1.09); }
+        .card .media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, color-mix(in srgb, var(--accent) 55%, transparent), transparent 55%); opacity: .55; transition: opacity .4s; }
+        .card:hover .media::after { opacity: .9; }
+        .chip { position: absolute; z-index: 3; top: .7rem; left: .7rem; font-size: .68rem; font-weight: 700; padding: .25rem .65rem; border-radius: 9999px; background: var(--accent); color: #fff; box-shadow: 0 4px 12px rgba(0,0,0,.2); }
+        .more { display: flex; align-items: center; justify-content: space-between; font-size: .78rem; font-weight: 600; color: var(--accent); padding-top: .8rem; border-top: 1px dashed var(--line); }
+        .more i { transition: transform .3s; }
+        .card:hover .more i { transform: translateX(6px); }
+        .card:focus-visible, .filter-btn:focus-visible, .icon-btn:focus-visible { outline: 3px solid #22c55e; outline-offset: 2px; }
+
+        .grid-fade { animation: fadeGrid .35s ease; }
+        @keyframes fadeGrid { from { opacity: .3; } to { opacity: 1; } }
+
+        /* Modal */
+        #projectModal { transition: opacity .25s; }
+        #projectModal.show { opacity: 1; }
+        #projectModal .panel { transform: translateY(30px) scale(.96); transition: transform .35s cubic-bezier(.2,.8,.2,1); }
+        #projectModal.show .panel { transform: none; }
+        .icon-btn { width: 2.25rem; height: 2.25rem; border-radius: 9999px; display: inline-flex; align-items: center; justify-content: center; transition: all .2s; }
+        .icon-btn:hover { transform: scale(1.1); }
+        .glass { background: rgba(0,0,0,.45); color: #fff; backdrop-filter: blur(6px); }
+        .glass:hover { background: rgba(0,0,0,.7); }
+        .link-btn { display: inline-flex; align-items: center; gap: .5rem; padding: .55rem 1rem; border-radius: .85rem; font-size: .78rem; font-weight: 600; color: #fff; background: var(--accent); transition: transform .2s, filter .2s; }
+        .link-btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
+        .progress { height: 4px; background: var(--accent); transition: width .4s; }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+            .card { opacity: 1; }
+        }
+    </style>
 </head>
-<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300 min-h-screen flex flex-col font-sans">
+<body class="min-h-screen flex flex-col">
 
     <!-- HEADER / NAVBAR -->
-    <header class="sticky top-0 z-40 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-colors">
+    <header class="sticky top-0 z-40 backdrop-blur-md border-b" style="background: color-mix(in srgb, var(--bg) 80%, transparent); border-color: var(--line);">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <div class="bg-brand-600 text-white p-2 rounded-xl shadow-md">
+                <div class="bg-brand-600 text-white p-2 rounded-xl shadow-md w-10 h-10 flex items-center justify-center">
                     <i class="fa-solid fa-palette text-xl"></i>
                 </div>
                 <div>
-                    <h1 class="font-bold text-lg leading-tight">Portafolio ICC</h1>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">Industrias Culturales y Creativas</p>
+                    <h1 class="font-display font-bold text-lg leading-tight">Portafolio ICC</h1>
+                    <p class="text-xs muted">Industrias Culturales y Creativas</p>
                 </div>
             </div>
 
-            <!-- Dark Mode Toggle & Counter -->
             <div class="flex items-center space-x-4">
-                <span class="text-xs font-medium px-2.5 py-1 rounded-full bg-brand-100 text-brand-800 dark:bg-brand-900/40 dark:text-brand-300 hidden sm:inline-block">
-                    8 Proyectos
-                </span>
-                <button id="themeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition">
-                    <i class="fa-solid fa-moon dark:hidden text-lg"></i>
-                    <i class="fa-solid fa-sun hidden dark:block text-lg text-yellow-400"></i>
+                <span id="totalBadge" class="text-xs font-semibold px-3 py-1 rounded-full hidden sm:inline-block" style="background: color-mix(in srgb, #22c55e 18%, transparent); color: #16a34a;">8 Proyectos</span>
+                <button id="themeToggle" aria-label="Cambiar tema" class="icon-btn surface muted">
+                    <i class="fa-solid fa-moon dark:hidden text-base"></i>
+                    <i class="fa-solid fa-sun hidden dark:block text-base text-yellow-400"></i>
                 </button>
             </div>
         </div>
     </header>
 
     <!-- HERO SECTION -->
-    <section class="bg-gradient-to-b from-brand-50/50 to-transparent dark:from-gray-800/40 dark:to-transparent py-10 px-4">
-        <div class="max-w-4xl mx-auto text-center space-y-4">
-            <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">
-                Cultura en movimiento
-            </h2>
-            <p class="text-gray-600 dark:text-gray-300 text-base sm:text-lg max-w-2xl mx-auto">
-                Un espacio para descubrir, crear e inspirar.
-            </p>
+    <section class="hero py-14 sm:py-20 px-4">
+        <span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span><span class="blob b4"></span>
+        <div class="max-w-4xl mx-auto text-center space-y-5">
+            <h2 class="hero-title font-display text-4xl sm:text-6xl font-extrabold tracking-tight leading-[1.05]">Cultura en movimiento</h2>
+            <p class="muted text-base sm:text-lg max-w-2xl mx-auto">Un espacio para descubrir, crear e inspirar.</p>
 
-            <!-- BUSCADOR Y FILTROS -->
-            <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3 max-w-2xl mx-auto">
+            <!-- BUSCADOR -->
+            <div class="pt-4 max-w-2xl mx-auto">
                 <div class="relative w-full">
-                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                    <input type="text" id="searchInput" placeholder="Buscar por título, palabra clave, autor..." 
-                           class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition text-sm">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 muted"></i>
+                    <input type="text" id="searchInput" placeholder="Buscar por título, palabra clave, autor..."
+                           class="w-full pl-11 pr-4 py-3.5 rounded-2xl surface shadow-lg shadow-black/5 focus:ring-2 focus:ring-brand-500 outline-none transition text-sm" style="color: var(--ink);">
                 </div>
             </div>
 
             <!-- Categorías -->
             <div class="flex flex-wrap justify-center gap-2 pt-2" id="categoryFilters">
-                <button data-cat="all" class="filter-btn active px-3.5 py-1.5 rounded-full text-xs font-semibold bg-brand-600 text-white shadow-sm transition">Todos</button>
-                <button data-cat="apps" class="filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-gray-200 text-gray-700 dark:bg-gray-800 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700 transition">Plataformas / Apps</button>
-                <button data-cat="editorial" class="filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-gray-200 text-gray-700 dark:bg-gray-800 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700 transition">Editorial & Prensa</button>
-                <button data-cat="games" class="filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-gray-200 text-gray-700 dark:bg-gray-800 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700 transition">Videojuegos</button>
-                <button data-cat="branding" class="filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-gray-200 text-gray-700 dark:bg-gray-800 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700 transition">Branding & Memoria</button>
+                <button data-cat="all" class="filter-btn active">Todos <span class="count"></span></button>
+                <button data-cat="apps" class="filter-btn"><i class="fa-solid fa-circle text-[7px]" style="color:var(--c-apps)"></i>Plataformas / Apps <span class="count"></span></button>
+                <button data-cat="editorial" class="filter-btn"><i class="fa-solid fa-circle text-[7px]" style="color:var(--c-editorial)"></i>Editorial &amp; Prensa <span class="count"></span></button>
+                <button data-cat="games" class="filter-btn"><i class="fa-solid fa-circle text-[7px]" style="color:var(--c-games)"></i>Videojuegos <span class="count"></span></button>
+                <button data-cat="branding" class="filter-btn"><i class="fa-solid fa-circle text-[7px]" style="color:var(--c-branding)"></i>Branding &amp; Memoria <span class="count"></span></button>
             </div>
         </div>
     </section>
 
     <!-- GRID DE PROYECTOS -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow">
-        <div id="projectsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            <!-- Las tarjetas se generan dinámicamente con JS -->
-        </div>
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 flex-grow w-full">
+        <div id="projectsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
 
         <div id="noResults" class="hidden text-center py-16 space-y-3">
-            <i class="fa-solid fa-folder-open text-4xl text-gray-400"></i>
-            <p class="text-gray-500 dark:text-gray-400 font-medium">No se encontraron proyectos con ese criterio de búsqueda.</p>
+            <i class="fa-solid fa-folder-open text-4xl muted"></i>
+            <p class="muted font-medium">No se encontraron proyectos con ese criterio de búsqueda.</p>
         </div>
     </main>
 
     <!-- MODAL DE DETALLE -->
-    <div id="projectModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-gray-800 rounded-2xl max-w-2xl w-full overflow-hidden shadow-2xl transform transition-all max-h-[90vh] flex flex-col">
-            <div class="relative h-48 sm:h-64 bg-gray-100 dark:bg-gray-900 flex-shrink-0">
+    <div id="projectModal" class="fixed inset-0 z-50 hidden opacity-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4" role="dialog" aria-modal="true">
+        <div class="panel surface rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl max-h-[90vh] flex flex-col" id="modalPanel">
+            <div class="progress" id="modalProgress"></div>
+            <div class="relative h-48 sm:h-64 flex-shrink-0" style="background: var(--line);">
                 <img id="modalImage" src="" alt="" class="w-full h-full object-cover">
-                <button id="closeModal" class="absolute top-3 right-3 bg-black/50 hover:bg-black/70 text-white rounded-full w-8 h-8 flex items-center justify-center transition">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                <button id="closeModal" aria-label="Cerrar" class="icon-btn glass absolute top-3 right-3"><i class="fa-solid fa-xmark"></i></button>
+                <button id="prevProject" aria-label="Proyecto anterior" class="icon-btn glass absolute top-1/2 -translate-y-1/2 left-3"><i class="fa-solid fa-chevron-left"></i></button>
+                <button id="nextProject" aria-label="Proyecto siguiente" class="icon-btn glass absolute top-1/2 -translate-y-1/2 right-3"><i class="fa-solid fa-chevron-right"></i></button>
                 <div class="absolute bottom-3 left-3">
-                    <span id="modalCategory" class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-brand-600 text-white shadow"></span>
+                    <span id="modalCategory" class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-white shadow" style="background: var(--accent);"></span>
                 </div>
             </div>
-            
-            <div class="p-6 overflow-y-auto space-y-4 flex-grow">
-                <h3 id="modalTitle" class="text-2xl font-bold text-gray-900 dark:text-white"></h3>
-                
+
+            <div class="p-6 overflow-y-auto space-y-4 flex-grow" id="modalBody">
+                <h3 id="modalTitle" class="font-display text-2xl sm:text-3xl font-bold"></h3>
+
                 <div class="space-y-2">
-                    <h4 class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Descripción del Proyecto</h4>
-                    <p id="modalDescription" class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed"></p>
+                    <h4 class="text-xs font-semibold muted uppercase tracking-wider">Descripción del Proyecto</h4>
+                    <p id="modalDescription" class="muted text-sm leading-relaxed"></p>
                 </div>
 
                 <div id="modalTeamContainer" class="pt-2">
-                    <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider block mb-1">Integrantes / Autores</span>
-                    <p id="modalTeam" class="text-sm font-medium text-gray-800 dark:text-gray-200"></p>
+                    <span class="text-xs font-semibold muted uppercase tracking-wider block mb-1">Integrantes / Autores</span>
+                    <p id="modalTeam" class="text-sm font-medium"></p>
                 </div>
             </div>
 
-            <div class="p-4 bg-gray-50 dark:bg-gray-900/50 border-t border-gray-200 dark:border-gray-700/50 flex flex-wrap gap-2 justify-end" id="modalLinks">
-                <!-- Enlaces dinámicos -->
-            </div>
+            <div class="p-4 border-t flex flex-wrap gap-2 justify-end" style="border-color: var(--line); background: color-mix(in srgb, var(--bg) 60%, var(--surface));" id="modalLinks"></div>
         </div>
     </div>
 
     <!-- FOOTER -->
-    <footer class="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 py-6 text-center text-xs text-gray-500 dark:text-gray-400">
+    <footer class="border-t py-6 text-center text-xs muted" style="border-color: var(--line);">
         <p>© Portafolio Académico de Industrias Culturales y Creativas (ICC)</p>
     </footer>
 
-    <!-- SCRIPT -->
     <script>
         const projectsData = [
             {
@@ -234,56 +298,87 @@
             }
         ];
 
+        const accents = { apps: '#2563eb', editorial: '#d97706', games: '#7c3aed', branding: '#e11d48' };
+        const FALLBACK = 'https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?w=500';
         const grid = document.getElementById('projectsGrid');
         const noResults = document.getElementById('noResults');
+        const modal = document.getElementById('projectModal');
+        const modalPanel = document.getElementById('modalPanel');
+        let currentCategory = 'all', searchQuery = '', visible = [], currentId = null;
+        const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-        function renderProjects(data) {
+        function esc(s) { return s.replace(/"/g, '&quot;'); }
+
+        function renderProjects(data, animate = true) {
+            visible = data;
             grid.innerHTML = '';
-            
-            if (data.length === 0) {
-                noResults.classList.remove('hidden');
-                return;
-            } else {
-                noResults.classList.add('hidden');
-            }
+            if (animate) { grid.classList.remove('grid-fade'); void grid.offsetWidth; grid.classList.add('grid-fade'); }
+            noResults.classList.toggle('hidden', data.length > 0);
 
-            data.forEach(p => {
+            data.forEach((p, i) => {
                 const card = document.createElement('div');
-                card.className = "bg-white dark:bg-gray-800 rounded-2xl overflow-hidden border border-gray-100 dark:border-gray-700/60 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group cursor-pointer";
+                card.className = 'card';
+                card.tabIndex = 0;
+                card.setAttribute('role', 'button');
+                card.style.setProperty('--accent', accents[p.category]);
+                card.style.setProperty('--i', i);
                 card.onclick = () => openModal(p.id);
+                card.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(p.id); } };
 
                 card.innerHTML = `
-                    <div class="relative h-44 overflow-hidden bg-gray-100 dark:bg-gray-900">
-                        <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onError="this.src='https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?w=500'">
-                        <div class="absolute top-2 right-2">
-                            <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-white/90 dark:bg-gray-900/90 text-gray-800 dark:text-gray-200 shadow-sm">
-                                ${p.categoryLabel}
-                            </span>
-                        </div>
+                    <div class="media">
+                        <img src="${p.image}" alt="${esc(p.title)}" loading="lazy" onerror="this.onerror=null;this.src='${FALLBACK}'">
+                        <span class="chip">${p.categoryLabel}</span>
                     </div>
-                    <div class="p-5 flex flex-col flex-grow justify-between space-y-3">
+                    <div class="p-5 flex flex-col flex-grow justify-between gap-3">
                         <div>
-                            <h3 class="font-bold text-gray-900 dark:text-white text-base group-hover:text-brand-600 dark:group-hover:text-brand-500 transition-colors line-clamp-1">${p.title}</h3>
-                            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1 line-clamp-3">${p.description}</p>
+                            <h3 class="font-display font-bold text-lg leading-snug line-clamp-2">${p.title}</h3>
+                            <p class="text-xs muted mt-2 line-clamp-3 leading-relaxed">${p.description}</p>
                         </div>
-                        <div class="pt-2 border-t border-gray-100 dark:border-gray-700/50 flex items-center justify-between text-xs text-brand-600 dark:text-brand-400 font-medium">
-                            <span>Ver detalle completo</span>
-                            <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
-                        </div>
-                    </div>
-                `;
+                        <div class="more"><span>Ver detalle completo</span><i class="fa-solid fa-arrow-right"></i></div>
+                    </div>`;
+
+                // Resplandor y inclinación que siguen al cursor
+                if (!reduceMotion && matchMedia('(hover: hover)').matches) {
+                    card.addEventListener('mousemove', (e) => {
+                        const r = card.getBoundingClientRect();
+                        const x = e.clientX - r.left, y = e.clientY - r.top;
+                        card.style.setProperty('--mx', x + 'px');
+                        card.style.setProperty('--my', y + 'px');
+                        const rx = ((y / r.height) - .5) * -6, ry = ((x / r.width) - .5) * 6;
+                        card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
+                    });
+                    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+                }
                 grid.appendChild(card);
             });
         }
 
-        const modal = document.getElementById('projectModal');
-        const closeModalBtn = document.getElementById('closeModal');
+        function filterProjects(animate = true) {
+            const filtered = projectsData.filter(p => {
+                const matchesCat = currentCategory === 'all' || p.category === currentCategory;
+                const matchesSearch = p.title.toLowerCase().includes(searchQuery) ||
+                                      p.description.toLowerCase().includes(searchQuery) ||
+                                      p.team.toLowerCase().includes(searchQuery);
+                return matchesCat && matchesSearch;
+            });
+            renderProjects(filtered, animate);
+        }
 
-        function openModal(id) {
-            const project = projectsData.find(p => p.id === id);
-            if (!project) return;
+        // Contadores en los filtros
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            const cat = btn.dataset.cat;
+            btn.querySelector('.count').textContent = cat === 'all' ? projectsData.length : projectsData.filter(p => p.category === cat).length;
+        });
+        document.getElementById('totalBadge').textContent = projectsData.length + ' Proyectos';
 
-            document.getElementById('modalImage').src = project.image;
+        /* ---------- Modal ---------- */
+        function fillModal(project) {
+            const accent = accents[project.category];
+            modalPanel.style.setProperty('--accent', accent);
+            const img = document.getElementById('modalImage');
+            img.onerror = () => { img.onerror = null; img.src = FALLBACK; };
+            img.src = project.image;
             document.getElementById('modalTitle').textContent = project.title;
             document.getElementById('modalCategory').textContent = project.categoryLabel;
             document.getElementById('modalDescription').textContent = project.description;
@@ -291,60 +386,69 @@
 
             const linksContainer = document.getElementById('modalLinks');
             linksContainer.innerHTML = '';
-
             if (project.links && project.links.length > 0) {
                 project.links.forEach(l => {
-                    const btn = document.createElement('a');
-                    btn.href = l.url;
-                    btn.target = "_blank";
-                    btn.className = "inline-flex items-center space-x-2 px-4 py-2 rounded-xl text-xs font-semibold bg-brand-600 hover:bg-brand-700 text-white shadow-sm transition";
-                    btn.innerHTML = `<i class="fa-solid ${l.icon || 'fa-link'}"></i> <span>${l.label}</span>`;
-                    linksContainer.appendChild(btn);
+                    const a = document.createElement('a');
+                    a.href = l.url; a.target = '_blank'; a.rel = 'noopener';
+                    a.className = 'link-btn';
+                    const icon = l.icon || 'fa-link';
+                    const family = icon === 'fa-figma' ? 'fa-brands' : 'fa-solid';
+                    a.innerHTML = `<i class="${family} ${icon}"></i> <span>${l.label}</span>`;
+                    linksContainer.appendChild(a);
                 });
             } else {
-                linksContainer.innerHTML = `<span class="text-xs text-gray-400 italic">Este proyecto no cuenta con enlaces externos activos.</span>`;
+                linksContainer.innerHTML = `<span class="text-xs muted italic">Este proyecto no cuenta con enlaces externos activos.</span>`;
             }
 
+            const list = visible.length ? visible : projectsData;
+            const idx = list.findIndex(p => p.id === project.id);
+            document.getElementById('modalProgress').style.width = ((idx + 1) / list.length * 100) + '%';
+            document.getElementById('modalBody').scrollTop = 0;
+        }
+
+        function openModal(id) {
+            const project = projectsData.find(p => p.id === id);
+            if (!project) return;
+            currentId = id;
+            fillModal(project);
             modal.classList.remove('hidden');
+            requestAnimationFrame(() => modal.classList.add('show'));
             document.body.style.overflow = 'hidden';
         }
 
-        closeModalBtn.onclick = () => {
-            modal.classList.add('hidden');
+        function closeModal() {
+            modal.classList.remove('show');
+            setTimeout(() => modal.classList.add('hidden'), 250);
             document.body.style.overflow = 'auto';
-        };
-
-        modal.onclick = (e) => {
-            if (e.target === modal) {
-                modal.classList.add('hidden');
-                document.body.style.overflow = 'auto';
-            }
-        };
-
-        let currentCategory = 'all';
-        let searchQuery = '';
-
-        function filterProjects() {
-            const filtered = projectsData.filter(p => {
-                const matchesCat = currentCategory === 'all' || p.category === currentCategory;
-                const matchesSearch = p.title.toLowerCase().includes(searchQuery) || 
-                                      p.description.toLowerCase().includes(searchQuery) ||
-                                      p.team.toLowerCase().includes(searchQuery);
-                return matchesCat && matchesSearch;
-            });
-            renderProjects(filtered);
+            currentId = null;
         }
 
+        function step(dir) {
+            const list = visible.length ? visible : projectsData;
+            const idx = list.findIndex(p => p.id === currentId);
+            const next = list[(idx + dir + list.length) % list.length];
+            currentId = next.id;
+            modalPanel.animate([{ opacity: .4, transform: `translateX(${dir * 24}px)` }, { opacity: 1, transform: 'none' }], { duration: 300, easing: 'ease-out' });
+            fillModal(next);
+        }
+
+        document.getElementById('closeModal').onclick = closeModal;
+        document.getElementById('prevProject').onclick = () => step(-1);
+        document.getElementById('nextProject').onclick = () => step(1);
+        modal.onclick = (e) => { if (e.target === modal) closeModal(); };
+        document.addEventListener('keydown', (e) => {
+            if (!currentId) return;
+            if (e.key === 'Escape') closeModal();
+            if (e.key === 'ArrowLeft') step(-1);
+            if (e.key === 'ArrowRight') step(1);
+        });
+
+        /* ---------- Filtros y búsqueda ---------- */
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
-                document.querySelectorAll('.filter-btn').forEach(b => {
-                    b.classList.remove('bg-brand-600', 'text-white', 'active');
-                    b.classList.add('bg-gray-200', 'text-gray-700', 'dark:bg-gray-800', 'dark:text-gray-300');
-                });
-                btn.classList.remove('bg-gray-200', 'text-gray-700', 'dark:bg-gray-800', 'dark:text-gray-300');
-                btn.classList.add('bg-brand-600', 'text-white', 'active');
-
-                currentCategory = btn.getAttribute('data-cat');
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentCategory = btn.dataset.cat;
                 filterProjects();
             });
         });
@@ -354,12 +458,17 @@
             filterProjects();
         });
 
-        const themeToggleBtn = document.getElementById('themeToggle');
-        themeToggleBtn.addEventListener('click', () => {
-            document.documentElement.classList.toggle('dark');
+        /* ---------- Tema (recuerda la preferencia) ---------- */
+        try {
+            const saved = localStorage.getItem('icc-theme');
+            if (saved === 'dark' || (!saved && matchMedia('(prefers-color-scheme: dark)').matches)) document.documentElement.classList.add('dark');
+        } catch (e) {}
+        document.getElementById('themeToggle').addEventListener('click', () => {
+            const isDark = document.documentElement.classList.toggle('dark');
+            try { localStorage.setItem('icc-theme', isDark ? 'dark' : 'light'); } catch (e) {}
         });
 
-        renderProjects(projectsData);
+        renderProjects(projectsData, false);
     </script>
 </body>
 </html>
